@@ -1,0 +1,96 @@
+<div th:fragment="content">
+	<div class="row">
+		<div class="col-lg-12">
+			<section class="panel">
+				<header class="panel-heading">
+					<h1>Tambah Data</h1>
+				</header>
+				<div class="panel-body">
+					<div class="form">
+						<form th:action="@{/tbu/save}" th:object="${tbu}" method="post" id="form1"
+							class="cmxform form-horizontal tasi-form">
+							<div class="form-group ">
+								<label for="panjang" class="control-label col-lg-2">Umur Badan</label>
+								<div class="col-lg-10">
+									<input type="text" th:field="*{umur}" required="required"
+										class="form-control" />
+								</div>
+							</div>
+							<div class="form-group ">
+								<label for="panjang" class="control-label col-lg-2">Jenis Kelamin</label>
+								<div class="col-lg-10">
+										<select th:field="*{jenisKelamin}" class="form-control col-md-7 col-xs-12" placeholder="Pilih Jenis Kelamin">
+                                            <option th:value="Laki-Laki" th:text="Laki-Laki"></option>
+                                            <option th:value="Perempuan" th:text="Perempuan"></option>
+                                        </select>
+								</div>
+							</div>
+							<div class="form-group ">
+								<label for="minus3sd" class="control-label col-lg-2">-3SD</label>
+								<div class="col-lg-10">
+									<input type="text" th:field="*{minus3sd}" required="required"
+										class="form-control" />
+								</div>
+							</div>
+							<div class="form-group ">
+								<label for="minus2sd" class="control-label col-lg-2">-2SD</label>
+								<div class="col-lg-10">
+									<input type="text" th:field="*{minus2sd}" required="required"
+										class="form-control" />
+								</div>
+							</div>
+							<div class="form-group ">
+								<label for="minus1sd" class="control-label col-lg-2">-1SD</label>
+								<div class="col-lg-10">
+									<input type="text" th:field="*{minus1sd}" required="required"
+										class="form-control" />
+								</div>
+							</div>
+							<div class="form-group ">
+								<label for="median" class="control-label col-lg-2">Median</label>
+								<div class="col-lg-10">
+									<input type="text" th:field="*{median}" required="required"
+										class="form-control" />
+								</div>
+							</div>
+							<div class="form-group ">
+								<label for="plus1sd" class="control-label col-lg-2">+1SD</label>
+								<div class="col-lg-10">
+									<input type="text" th:field="*{plus1sd}" required="required"
+										class="form-control" />
+								</div>
+							</div>
+							<div class="form-group ">
+								<label for="plus2sd" class="control-label col-lg-2">+2SD</label>
+								<div class="col-lg-10">
+									<input type="text" th:field="*{plus2sd}" required="required"
+										class="form-control" />
+								</div>
+							</div>
+							<div class="form-group ">
+								<label for="plus3sd" class="control-label col-lg-2">+3SD</label>
+								<div class="col-lg-10">
+									<input type="text" th:field="*{plus3sd}" required="required"
+										class="form-control" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-lg-offset-2 col-lg-10">
+									<div class="col-lg-10">
+										<button type="submit" class="btn btn-primary">
+											<i class="glyphicon glyphicon-save"></i> &nbsp;Simpan
+										</button>
+										<a th:href="@{/tbu}" class="btn btn-danger"><i
+											class="glyphicon glyphicon-chevron-left"></i> &nbsp;Kembali </a>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
+</div>
