@@ -1,0 +1,53 @@
+<div th:fragment="content">
+	<div class="row">
+		<div class="col-lg-12">
+			<section class="panel">
+				<header class="panel-heading">
+					<h1>Tambah Assigment</h1>
+				</header>
+				<div class="panel-body">
+					<div class="form">
+						<form th:action="@{/assigment/save}" th:object="${assigment}" method="post" id="form1"
+							class="cmxform form-horizontal tasi-form">
+							<div class="form-group ">
+								<label for="panjang" class="control-label col-lg-2">Nama Pengguna</label>
+								<div class="col-lg-10">
+									<select th:field="*{idUser}" class="select2_single form-control" placeholder="Pilih Ayah">
+                                            <option value="NONE"></option>
+                                            <option th:each="user : ${allUsers}"
+                                                    th:value="${user.userId}"
+                                                    th:text="${user.nama}">user</option>
+                                        </select>
+								</div>
+							</div>
+							<div class="form-group ">
+								<label for="panjang" class="control-label col-lg-2">Jabatan</label>
+								<div class="col-lg-10">
+										<select th:field="*{idJabatan}" class="select2_single form-control" placeholder="Pilih Ayah">
+                                            <option value="NONE"></option>
+                                            <option th:each="jabatan : ${allJabatans}"
+                                                    th:value="${jabatan.jabatanId}"
+                                                    th:text="${jabatan.namaJabatan}">jabatan</option>
+                                        </select>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<div class="col-lg-offset-2 col-lg-10">
+									<div class="col-lg-10">
+										<button type="submit" class="btn btn-primary">
+											<i class="glyphicon glyphicon-save"></i> &nbsp;Simpan
+										</button>
+										<a th:href="@{/assigment}" class="btn btn-danger"><i
+											class="glyphicon glyphicon-chevron-left"></i> &nbsp;Kembali </a>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
+</div>

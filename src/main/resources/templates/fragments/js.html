@@ -9,6 +9,7 @@
     <script src="/js/jquery.customSelect.min.js" ></script>
     <script src="/js/respond.min.js" ></script>
     <script type="text/javascript" src="/js/jquery.validate.min.js"></script>
+    <script src="/js/select2.full.js"></script>
 
     <script class="include" type="text/javascript" src="/js/jquery.dcjqaccordion.2.7.js"></script>
 
@@ -150,3 +151,20 @@
 	/*]]>*/
 </script>
 <!-- /Sweet Alert Delete -->
+
+<!-- select2 -->
+<script>
+	$(document).ready(function() {
+		$(".select2_single").select2({
+			placeholder : "",
+			allowClear : true
+		});
+		$(".select2_group").select2({});
+		$(".select2_multiple").select2({
+			maximumSelectionLength : 4,
+			placeholder : "With Max Selection limit 4",
+			allowClear : true
+		});
+	});
+</script>
+<!-- /select2 -->

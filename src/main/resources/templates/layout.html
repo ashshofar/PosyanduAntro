@@ -53,6 +53,23 @@
 					<li>
 						<a href="index.html"> <i class="icon-dashboard"></i> <span>Dashboard</span></a>
 					</li>
+					<li>
+						<a th:href="@{/assigment/}"> <i class="icon-dashboard"></i> <span>Assigment</span></a>
+					</li>
+					<li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="icon-user"></i>
+                          <span>Pengguna</span>
+                      </a>
+                      <ul class="sub">
+                     	  <li><a th:href="@{/user/}">Semua Pengguna</a></li>
+                          <li><a th:href="@{/user/orangtua}">Orangtua</a></li>
+                          <li><a th:href="@{/user/petugas}">Petugas</a></li>
+                          <li><a th:href="@{/user/bidan}">Bidan</a></li>
+                          <li><a th:href="@{/user/rw}">Rw</a></li>
+                          
+                      </ul>
+                  	</li>
 					<li class="sub-menu">
                       <a href="javascript:;" >
                           <i class=" icon-bar-chart"></i>
@@ -65,7 +82,7 @@
                           <li><a th:href="@{/bbp/}">Berat / Panjang </a></li>
                           <li><a th:href="@{/bbt/}">Berat / Tinggi </a></li>
                       </ul>
-                  </li>
+                  	</li>
 				</ul>
 				
 				<!-- sidebar menu end-->
