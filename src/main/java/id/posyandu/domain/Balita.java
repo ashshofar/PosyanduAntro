@@ -1,6 +1,8 @@
 package id.posyandu.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -42,6 +45,12 @@ public class Balita {
     @ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.MERGE)
     @JoinColumn
     private User ibu;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="idBalita")
+    private List<Berat> daftarBerat = new ArrayList<>();
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="idBalita")
+    private List<Tinggi> daftarTinggi = new ArrayList<>();
 
 	public String getBalitaId() {
 		return balitaId;
@@ -106,9 +115,22 @@ public class Balita {
 	public void setIbu(User ibu) {
 		this.ibu = ibu;
 	}
-	
-	
-    
-    
 
+	public List<Berat> getDaftarBerat() {
+		return daftarBerat;
+	}
+
+	public void setDaftarBerat(List<Berat> daftarBerat) {
+		this.daftarBerat = daftarBerat;
+	}
+
+	public List<Tinggi> getDaftarTinggi() {
+		return daftarTinggi;
+	}
+
+	public void setDaftarTinggi(List<Tinggi> daftarTinggi) {
+		this.daftarTinggi = daftarTinggi;
+	}
+    
+   
 }
