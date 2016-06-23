@@ -1,6 +1,7 @@
 package id.posyandu.domain;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -51,6 +53,9 @@ public class Balita {
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy="idBalita")
     private List<Tinggi> daftarTinggi = new ArrayList<>();
+    
+    @Transient 
+    private String umur;
 
 	public String getBalitaId() {
 		return balitaId;
@@ -130,6 +135,26 @@ public class Balita {
 
 	public void setDaftarTinggi(List<Tinggi> daftarTinggi) {
 		this.daftarTinggi = daftarTinggi;
+	}
+	
+	public String hitungumur(){
+		Date lahir = this.tanggalLahir;
+		Date sekarang = new Date();
+		
+	    Calendar cal = Calendar.getInstance();
+	    cal.setTime(lahir);
+	    int year = cal.get(Calendar.YEAR);
+	    int month = cal.get(Calendar.MONTH);
+	    	    
+	    Calendar calnow = Calendar.getInstance();
+	    calnow.setTime(sekarang);
+	    int yearnow = calnow.get(Calendar.YEAR);
+	    int monthnow = calnow.get(Calendar.MONTH);
+	   
+	    
+	    this.umur = String.valueOf((yearnow - year) * 12 + (monthnow - month) + 1);
+	    
+		return umur;
 	}
     
    
