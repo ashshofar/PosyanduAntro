@@ -50,11 +50,11 @@
 			<div id="sidebar" class="nav-collapse ">
 				<!-- sidebar menu start-->
 				<ul class="sidebar-menu" id="nav-accordion">
-					<li>
-						<a href="index.html"> <i class="icon-dashboard"></i> <span>Dashboard</span></a>
+					<li >
+						<a href="index.html" > <i class="icon-dashboard"></i> <span>Dashboard</span></a>
 					</li>
 					<li class="sub-menu">
-                      <a href="javascript:;" >
+                      <a href="javascript:;"  th:classappend="${#httpServletRequest.getRequestURI().startsWith('/user') ? 'active':''}" >
                           <i class="icon-user"></i>
                           <span>Pengguna</span>
                       </a>
@@ -68,7 +68,7 @@
                       </ul>
                   	</li>
 					<li class="sub-menu">
-                      <a href="javascript:;" >
+                      <a href="javascript:;">
                           <i class=" icon-bar-chart"></i>
                           <span>Antropometri</span>
                       </a>
@@ -81,16 +81,16 @@
                       </ul>
                   	</li>
 					<li>
-						<a th:href="@{/assigment/}"> <i class="icon-dashboard"></i> <span>Assigment</span></a>
+						<a th:href="@{/assigment/}" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/assigment') ? 'active':''}"> <i class="icon-dashboard"></i> <span>Assigment</span></a>
 					</li>
 					<li>
-						<a th:href="@{/balita/}"> <i class="icon-github-alt"></i> <span>Balita</span></a>
+						<a th:href="@{/balita/}" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/balita') ? 'active':''}"> <i class="icon-github-alt"></i> <span>Balita</span></a>
 					</li>
 					<li>
-						<a th:href="@{/berat/}"> <i class="icon-file"></i> <span>Berat Badan</span></a>
+						<a th:href="@{/berat/}" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/berat') ? 'active':''}"> <i class="icon-file"></i> <span>Berat Badan</span></a>
 					</li>
 					<li>
-						<a th:href="@{/tinggi/}"> <i class="icon-file"></i> <span>Tinggi Badan</span></a>
+						<a th:href="@{/tinggi/}" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/tinggi') ? 'active':''}"> <i class="icon-file"></i> <span>Tinggi Badan</span></a>
 					</li>
 					
 				</ul>

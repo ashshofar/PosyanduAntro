@@ -106,8 +106,6 @@ public class BalitaController {
             Balita balita = balitaService.findBalita(balitaId);
             if (balita != null) {
                 model.addAttribute("balita", balita);
-                model.addAttribute("beratBalitas", (Collection<Berat>) beratService.findAllBeratByIdBalita(balitaId));
-                model.addAttribute("tinggiBalitas", (Collection<Tinggi>) tinggiService.findAllTinggiByIdBalita(balitaId));
                 return "/balita/view";
             } else {
                 redirectAttributes.addFlashAttribute("status", "notfound");
@@ -133,5 +131,26 @@ public class BalitaController {
 	    	
 	    	return "redirect:/balita";
 	    }
-
+	
+	@RequestMapping(value = "/balita/berat/{balitaId}", method = RequestMethod.GET)
+    public String Berat(@PathVariable("balitaId") String balitaId, 
+            Model model) {
+        
+            Balita balita = balitaService.findBalita(balitaId);
+            model.addAttribute("balita", balita);
+            model.addAttribute("beratBalitas", (Collection<Berat>) beratService.findAllBeratByIdBalita(balitaId));
+            return "/balita/berat";
+            
+    }
+	
+	@RequestMapping(value = "/balita/tinggi/{balitaId}", method = RequestMethod.GET)
+    public String Tinggi(@PathVariable("balitaId") String balitaId, 
+            Model model) {
+        
+            Balita balita = balitaService.findBalita(balitaId);
+            model.addAttribute("balita", balita);
+            model.addAttribute("tinggiBalitas", (Collection<Tinggi>) tinggiService.findAllTinggiByIdBalita(balitaId));
+            return "/balita/tinggi";
+            
+    }
 }
