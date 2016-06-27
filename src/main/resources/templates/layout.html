@@ -22,6 +22,7 @@
 			<!--logo end-->
 			<div class="top-nav ">
 				<!--search & user info start-->
+				<form name="f" th:action="@{/logout}" method="post">
 				<ul class="nav pull-right top-menu">
 					<li><input type="text" class="form-control search" placeholder="Search" /></li>
 					<!-- user login dropdown start-->
@@ -35,12 +36,13 @@
 							<li><a href="#"><i class="icon-cog"></i> Settings</a></li>
 							<li><a href="#"><i class="icon-bell-alt"></i>
 									Notification</a></li>
-							<li><a href='#'><i
+							<li><a href="#" onclick="$(this).closest('form').submit()"><i
 									class="icon-key"></i> Log Out
 							</a></li>
 						</ul></li>
 					<!-- user login dropdown end -->
 				</ul>
+				</form>
 				<!--search & user info end-->
 			</div>
 		</header>

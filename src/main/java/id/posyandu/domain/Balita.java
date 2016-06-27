@@ -19,6 +19,9 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import id.posyandu.service.BalitaService;
 
 @Entity
 @Table(name = "balita")
@@ -137,6 +140,7 @@ public class Balita {
 		this.daftarTinggi = daftarTinggi;
 	}
 	
+
 	public String hitungumur(){
 		Date lahir = this.tanggalLahir;
 		Date sekarang = new Date();

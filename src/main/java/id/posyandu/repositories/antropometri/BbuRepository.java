@@ -14,4 +14,6 @@ public interface BbuRepository extends CrudRepository<Beratbadanumur, String>{
 	@Query(value = "SELECT * FROM beratbadanumur WHERE jenis_kelamin = 'Perempuan' order by umur asc", nativeQuery = true)
 	Iterable<Beratbadanumur> findPerempuan();
 	
+	
+	
 }

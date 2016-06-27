@@ -222,6 +222,9 @@ public class UserController {
           redirectAttributes.addFlashAttribute("save", "unsuccess");
       }
 	   
+	   user.setActive(true);
+	   user.setUsername(user.getUserId());
+	   user.setPassword("2016");
 	   jabatan.setJabatanId("c33d618b-a759-4d2f-b5d0-bf5bc5c26d71");
 	   assigment.setIdUser(user);
 	   assigment.setIdJabatan(jabatan);

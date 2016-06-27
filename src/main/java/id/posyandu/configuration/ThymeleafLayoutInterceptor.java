@@ -7,6 +7,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class ThymeleafLayoutInterceptor extends HandlerInterceptorAdapter{
 	private static final String DEFAULT_LAYOUT = "layout";
+	private static final String LOGIN_LAYOUT = "login";
     private static final String DEFAULT_VIEW_ATTRIBUTE_NAME = "view";
  
     @Override
@@ -15,6 +16,10 @@ public class ThymeleafLayoutInterceptor extends HandlerInterceptorAdapter{
             return;
         }
         String originalViewName = modelAndView.getViewName();
+        if(originalViewName.equals("login")){
+            modelAndView.setViewName(LOGIN_LAYOUT);
+            return;
+        }
         
         if (isRedirectOrForward(originalViewName)) {
             return;

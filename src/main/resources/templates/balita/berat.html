@@ -32,7 +32,8 @@
 								<tr>
 									<th>Umur</th>
 									<th>Berat</th>
-                                </tr>
+									<th>Status</th>
+								 </tr>
 							</thead>
 							<tbody>
 								<tr th:if="${#lists.isEmpty(beratBalitas)}">
@@ -42,6 +43,7 @@
 								<tr th:each="data : ${beratBalitas}">
 									<td th:text="${data.umur}"></td>
 									<td th:text="${data.beratBalita}"></td>
+									<td th:text="${data.statusberatumur()}"></td>
 								</tr>
 							</tbody>
 						</table>

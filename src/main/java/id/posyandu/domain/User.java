@@ -18,8 +18,10 @@ import org.hibernate.annotations.GenericGenerator;
 public class User {
 	
 	@Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    //@GeneratedValue(generator = "uuid")
+    //@GenericGenerator(name = "uuid", strategy = "uuid2")
+	@GenericGenerator(name = "sequence_userId", strategy = "id.posyandu.domain.UserIdGenerator")
+    @GeneratedValue(generator = "sequence_userId")
     private String userId;
 
     private String nama;
@@ -32,6 +34,8 @@ public class User {
     
     private String foto;
     
+    @GenericGenerator(name = "sequence_userId", strategy = "id.posyandu.domain.UserIdGenerator")
+    @GeneratedValue(generator = "sequence_userId")
     private String username;
 
     private String password;
@@ -99,7 +103,7 @@ public class User {
 	public String getUsername() {
 		return username;
 	}
-
+	
 	public void setUsername(String username) {
 		this.username = username;
 	}
