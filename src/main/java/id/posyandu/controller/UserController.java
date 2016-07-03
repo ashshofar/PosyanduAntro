@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -35,6 +37,7 @@ public class UserController {
         return "/user/index";
     }
     
+    @PreAuthorize("hasAuthority('Admin')")
     @RequestMapping(value = "/user/create", method = RequestMethod.GET)
     public String viewForm(Model model){
         
@@ -134,6 +137,9 @@ public class UserController {
            redirectAttributes.addFlashAttribute("save", "unsuccess");
        }
 	   
+	   user.setActive(true);
+	   user.setUsername(user.getUserId());
+	   user.setPassword(new BCryptPasswordEncoder().encode("2016"));
 	   jabatan.setJabatanId("1ac99d1b-cee9-4c60-bb42-05e5399c883c");
 	   assigment.setIdUser(user);
 	   assigment.setIdJabatan(jabatan);
@@ -224,7 +230,7 @@ public class UserController {
 	   
 	   user.setActive(true);
 	   user.setUsername(user.getUserId());
-	   user.setPassword("2016");
+	   user.setPassword(new BCryptPasswordEncoder().encode("2016"));
 	   jabatan.setJabatanId("c33d618b-a759-4d2f-b5d0-bf5bc5c26d71");
 	   assigment.setIdUser(user);
 	   assigment.setIdJabatan(jabatan);
@@ -313,6 +319,9 @@ public class UserController {
          redirectAttributes.addFlashAttribute("save", "unsuccess");
      }
 	   
+	   user.setActive(true);
+	   user.setUsername(user.getUserId());
+	   user.setPassword(new BCryptPasswordEncoder().encode("2016"));
 	   jabatan.setJabatanId("6b651276-f046-4ce9-b6d8-14bfeb42591c");
 	   assigment.setIdUser(user);
 	   assigment.setIdJabatan(jabatan);
@@ -399,7 +408,9 @@ public String saveBidan(@ModelAttribute("user") User user,
     } else {
         redirectAttributes.addFlashAttribute("save", "unsuccess");
     }
-	   
+	   user.setActive(true);
+	   user.setUsername(user.getUserId());
+	   user.setPassword(new BCryptPasswordEncoder().encode("2016"));	   
 	   jabatan.setJabatanId("9ce32cfb-67f7-4410-93a1-3f15282a9811");
 	   assigment.setIdUser(user);
 	   assigment.setIdJabatan(jabatan);
@@ -452,6 +463,7 @@ public String updateBidan(@PathVariable("userId") String userId,
     } else {
         redirectAttributes.addFlashAttribute("edit", "unsuccess");
     }
+	
 	
 	return "redirect:/user/bidan";
 }

@@ -110,7 +110,6 @@ public class BeratController {
 	    		final RedirectAttributes redirectAttributes){
 	    	
 	    	berat.setBeratId(beratId);
-	    	    	
 	    	
 	    	if (beratService.saveBerat(berat) != null ) {
 	            redirectAttributes.addFlashAttribute("edit", "success");

@@ -8,12 +8,11 @@ import id.posyandu.domain.antropometri.Beratbadanumur;
 
 public interface BbuRepository extends CrudRepository<Beratbadanumur, String>{
 	
-	@Query(value = "SELECT * FROM beratbadanumur WHERE jenis_kelamin = 'Laki-Laki' order by umur asc", nativeQuery = true)
+	@Query(value = "SELECT * FROM beratbadanumur WHERE jenis_kelamin = 'Laki-Laki' order by umur + 0 ASC", nativeQuery = true)
 	Iterable<Beratbadanumur> findLaki();
 	
-	@Query(value = "SELECT * FROM beratbadanumur WHERE jenis_kelamin = 'Perempuan' order by umur asc", nativeQuery = true)
+	@Query(value = "SELECT * FROM beratbadanumur WHERE jenis_kelamin = 'Perempuan' order by umur + 0 ASC", nativeQuery = true)
 	Iterable<Beratbadanumur> findPerempuan();
-	
 	
 	
 }

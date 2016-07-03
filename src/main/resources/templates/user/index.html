@@ -28,6 +28,7 @@
 								<tr>
 									<th>Nama</th>
                                     <th>Jenis Kelamin</th>
+                                    <th>Username</th>
 									<th>Operasi</th>
 									
 								</tr>
@@ -40,6 +41,7 @@
 								<tr th:each="data : ${allUsers}">
 									<td th:text="${data.nama}"></td>
 									<td th:text="${data.jenisKelamin}"></td>
+									<td th:text="${data.username}"></td>
 									<td >
 										
 													<form class="form-inline"

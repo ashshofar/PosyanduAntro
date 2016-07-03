@@ -1,11 +1,13 @@
 package id.posyandu.domain.antropometri;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+
 
 @Entity
 @Table(name = "beratbadanumur")
@@ -33,7 +35,7 @@ public class Beratbadanumur {
 	float plus2sd;
 	
 	float plus3sd;
-
+	
 	public String getId() {
 		return id;
 	}
@@ -113,7 +115,5 @@ public class Beratbadanumur {
 	public void setPlus3sd(float plus3sd) {
 		this.plus3sd = plus3sd;
 	}
-	
-	
 
 }

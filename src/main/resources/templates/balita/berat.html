@@ -32,7 +32,9 @@
 								<tr>
 									<th>Umur</th>
 									<th>Berat</th>
-									<th>Status</th>
+									<th>Minus SD</th>
+									<th>Median</th>
+									<th>Plus SD</th>
 								 </tr>
 							</thead>
 							<tbody>
@@ -42,12 +44,17 @@
 								</tr>
 								<tr th:each="data : ${beratBalitas}">
 									<td th:text="${data.umur}"></td>
-									<td th:text="${data.beratBalita}"></td>
-									<td th:text="${data.statusberatumur()}"></td>
+									<td th:text="${data.berat}"></td>
+									<td th:text="${data.minus}"></td>
+									<td th:text="${data.median}"></td>
+									<td th:text="${data.plus}"></td>
+									
 								</tr>
 							</tbody>
 						</table>
 					</div>
+					
+					
 					
 				</div>
 			</section>

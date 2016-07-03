@@ -22,12 +22,15 @@ public class UserIdGenerator implements IdentifierGenerator{
 	    try {
 	        Statement statement=connection.createStatement();
 
-	        ResultSet rs=statement.executeQuery("select count(user_Id) as Id from posyanduantro.user");
+	        ResultSet rs=statement.executeQuery("select SUBSTRING(MAX(user_Id),5,3) as Id from posyanduantro.user");
 
 	        if(rs.next())
-	        {
-	            int id=rs.getInt(1)+101;
-	             String generatedId = prefix + new Integer(id).toString();
+	        {	
+	        	 //int id = Integer.parseInt(rs.getString("id"));
+	        	 
+	        	int id= rs.getInt("id")+1;
+	            
+	        	String generatedId = prefix + new Integer(id).toString();
 	             System.out.println("Generated Id: " + generatedId);
 	             return generatedId;
 	        }

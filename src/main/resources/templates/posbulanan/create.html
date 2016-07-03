@@ -29,12 +29,29 @@
 									<input type="text" th:value="*{balita.hitungumur()}" name="umur" required="required" readonly="" class="form-control"/>
 								</div>
 							</div>
+							<!-- 
+							<div class="form-group ">
+								<label for="panjang" class="control-label col-lg-2">Umur (Bulan)</label>
+								<div class="col-lg-10">
+									<input type="text" th:value="*{balita.hitungumur()}+L" name="umur" required="required" readonly="" class="form-control"/>
+								</div>
+							</div>
+							
+							 
+							<div class="form-group " th:if="*{balita.jenisKelamin} == 'Perempuan'"  >
+								<label for="panjang" class="control-label col-lg-2">Umur (Bulan)</label>
+								<div class="col-lg-10">
+									<input type="text" th:value="*{balita.hitungumur()}+P" name="umur" required="required" readonly="" class="form-control"/>
+								</div>
+							</div>
+							-->
 							<div class="form-group ">
 								<label for="panjang" class="control-label col-lg-2">Berat (Kg)</label>
 								<div class="col-lg-10">
 									<input type="text" th:value="*{berat.beratBalita}" name="beratBalita" required="required" class="form-control"/>
 								</div>
 							</div>
+							
 							<div class="form-group ">
 								<label for="panjang" class="control-label col-lg-2">Tinggi/Panjang (Cm)</label>
 								<div class="col-lg-10">

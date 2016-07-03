@@ -17,4 +17,6 @@ public interface BbuService {
     public Collection<Beratbadanumur> getAllBBULs();
     
     public Collection<Beratbadanumur> getAllBBUPs();
+    
+   
 }

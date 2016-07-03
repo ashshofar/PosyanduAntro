@@ -74,8 +74,8 @@ public class BeratTinggiController {
 	public String saveBeratTinggi(@ModelAttribute("berat") Berat berat,
 				@ModelAttribute("tinggi") Tinggi tinggi,
 				final RedirectAttributes redirectAttributes){
-	    	   	
-							
+	    	
+			
 	    	if (beratService.saveBerat(berat) != null) {
 	            redirectAttributes.addFlashAttribute("edit", "success");
 	        } else {

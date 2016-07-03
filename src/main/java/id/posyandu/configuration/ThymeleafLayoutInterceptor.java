@@ -8,7 +8,8 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 public class ThymeleafLayoutInterceptor extends HandlerInterceptorAdapter{
 	private static final String DEFAULT_LAYOUT = "layout";
 	private static final String LOGIN_LAYOUT = "login";
-    private static final String DEFAULT_VIEW_ATTRIBUTE_NAME = "view";
+	//private static final String PAGE_403 = "403";
+	private static final String DEFAULT_VIEW_ATTRIBUTE_NAME = "view";
  
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
@@ -20,7 +21,12 @@ public class ThymeleafLayoutInterceptor extends HandlerInterceptorAdapter{
             modelAndView.setViewName(LOGIN_LAYOUT);
             return;
         }
-        
+        /*
+        if(originalViewName.equals("403")){
+            modelAndView.setViewName(PAGE_403);
+            return;
+        }
+        */
         if (isRedirectOrForward(originalViewName)) {
             return;
         }
