@@ -12,8 +12,8 @@
 					<li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/balita/view') ? 'active':''}"><a th:href="@{/balita/view/{id}(id=${balita.balitaId})}" > <i
 							class="icon-user"></i> Profile
 					</a></li>
-					<li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/balita/berat') ? 'active':''}"><a th:href="@{/balita/berat/{id}(id=${balita.balitaId})}" > <i	class="icon-bar-chart"></i> Data Berat Badan </a></li>
-					<li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/balita/tinggi') ? 'active':''}"><a th:href="@{/balita/tinggi/{id}(id=${balita.balitaId})}" ><i	class="icon-bar-chart"></i> Data Tinggi Badan </a></li>
+					<li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/balita/berat') ? 'active':''}"><a th:href="@{/balita/berat/{id}(id=${balita.balitaId})}" > <i	class="icon-bar-chart"></i> Berat Badan Menurut Umur</a></li>
+					<li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/balita/tinggi') ? 'active':''}"><a th:href="@{/balita/tinggi/{id}(id=${balita.balitaId})}" ><i	class="icon-bar-chart"></i> Tinggi Badan Menurut Umur</a></li>
 					<li><a href="profile-edit.html"> <i class="icon-edit"></i>
 							Edit profile
 					</a>

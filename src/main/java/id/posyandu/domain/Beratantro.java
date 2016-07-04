@@ -6,6 +6,8 @@ public class Beratantro {
 	String minus;
 	String plus;
 	String median;
+	String status;
+	
 	public String getUmur() {
 		return umur;
 	}
@@ -36,6 +38,13 @@ public class Beratantro {
 	public void setMedian(String median) {
 		this.median = median;
 	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
 	
 	
 
