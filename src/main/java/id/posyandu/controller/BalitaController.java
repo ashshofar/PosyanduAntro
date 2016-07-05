@@ -28,6 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import id.posyandu.domain.Balita;
 import id.posyandu.domain.Beratantro;
+import id.posyandu.domain.ByPt;
 import id.posyandu.domain.User;
 import id.posyandu.service.BalitaService;
 import id.posyandu.service.BeratService;
@@ -335,6 +336,150 @@ public class BalitaController {
         model.addAttribute("beratBalitas", beratantros);
         
         return "/balita/panjang";
+            
+    }
+	
+	@RequestMapping(value = "/balita/beratpanjang/{balitaId}", method = RequestMethod.GET)
+    public String BeratPanjang(@PathVariable("balitaId") String balitaId, 
+            Model model) throws SQLException {
+        
+		Balita balita = balitaService.findBalita(balitaId);
+        String jenisKelamin = balita.getJenisKelamin();
+	
+	
+		Connection c = ds.getConnection();
+		Statement stmt =c.createStatement();
+		String query = "SELECT bt.panjang, bt.median, bt.minus1sd, bt.plus1sd, t.tinggi_balita, t.umur, b.berat_balita "
+				+ "FROM beratbadanpanjang bt JOIN tinggi t ON bt.panjang = ROUND(ROUND(t.tinggi_balita * 2) / 2, 1) "
+				+ "JOIN berat b ON b.umur = t.umur WHERE bt.jenis_kelamin = '" + jenisKelamin + "' "
+				+ "and b.id_balita = '" + balitaId + "' and b.umur < '25' ORDER By t.umur + 0";
+		
+		ResultSet rs = stmt.executeQuery(query);
+		
+		List<ByPt> beratantros = new ArrayList<ByPt>();
+		while (rs.next()) {
+	         
+			 //Float panjangtinggi = rs.getFloat("bt.panjang");
+	         Float median = rs.getFloat("bt.median");
+	         Float minus = rs.getFloat("bt.minus1sd");
+	         Float plus = rs.getFloat("bt.plus1sd");
+	         //Float tinggi = rs.getFloat("bt.tinggi_balita");
+	         Float berat = rs.getFloat("b.berat_balita");
+	         
+	         ByPt beratantro = new ByPt();
+	         beratantro.setPanjangtinggi("bt.panjang");
+	         beratantro.setMedian(rs.getString("bt.median"));
+	         beratantro.setMinus(rs.getString("bt.minus1sd"));
+	         beratantro.setPlus(rs.getString("bt.plus1sd"));
+	         beratantro.setBerat(rs.getString("b.berat_balita"));
+	         beratantro.setTinggi(rs.getString("t.tinggi_balita"));
+	         beratantro.setUmur(rs.getString("t.umur"));
+	         
+	         
+	         Float z;
+	         Float nilai_rujukan;
+	         
+	         if(berat < median){
+	        	 nilai_rujukan = median - minus;
+	         }else if(berat > median){
+	        	 nilai_rujukan = plus - median;
+	         }else{
+	        	 nilai_rujukan = median;
+	         }
+	         		         
+	         z = (berat - median) / nilai_rujukan;
+	         
+	         if(z < -3){
+	        	 beratantro.setStatus("Sangat Kurus");
+	         }else if(z >= -3 && z < -2){
+	        	 beratantro.setStatus("Kurus");
+	         }else if(z >= -2 && z <= 2){
+	        	 beratantro.setStatus("Normal");
+	         }else{
+	        	 beratantro.setStatus("Gemuk");
+	         }
+	         
+	         beratantros.add(beratantro);
+		}
+		
+		c.close();
+		
+		model.addAttribute("balita", balita);
+        model.addAttribute("beratBalitas", beratantros);
+        
+        return "/balita/beratpanjang";
+            
+    }
+	
+	@RequestMapping(value = "/balita/berattinggi/{balitaId}", method = RequestMethod.GET)
+    public String BeratTinggi(@PathVariable("balitaId") String balitaId, 
+            Model model) throws SQLException {
+        
+		Balita balita = balitaService.findBalita(balitaId);
+        String jenisKelamin = balita.getJenisKelamin();
+	
+	
+		Connection c = ds.getConnection();
+		Statement stmt =c.createStatement();
+		String query = "SELECT bt.tinggi, bt.median, bt.minus1sd, bt.plus1sd, t.tinggi_balita, t.umur, b.berat_balita "
+				+ "FROM beratbadantinggi bt JOIN tinggi t ON bt.tinggi = ROUND(ROUND(t.tinggi_balita * 2) / 2, 1) "
+				+ "JOIN berat b ON b.umur = t.umur WHERE bt.jenis_kelamin = '" + jenisKelamin + "' "
+				+ "and b.id_balita = '" + balitaId + "' and b.umur > '24' ORDER By t.umur + 0";
+		
+		ResultSet rs = stmt.executeQuery(query);
+		
+		List<ByPt> beratantros = new ArrayList<ByPt>();
+		while (rs.next()) {
+	         
+			 //Float panjangtinggi = rs.getFloat("bt.panjang");
+	         Float median = rs.getFloat("bt.median");
+	         Float minus = rs.getFloat("bt.minus1sd");
+	         Float plus = rs.getFloat("bt.plus1sd");
+	         //Float tinggi = rs.getFloat("bt.tinggi_balita");
+	         Float berat = rs.getFloat("b.berat_balita");
+	         
+	         ByPt beratantro = new ByPt();
+	         beratantro.setPanjangtinggi("bt.tinggi");
+	         beratantro.setMedian(rs.getString("bt.median"));
+	         beratantro.setMinus(rs.getString("bt.minus1sd"));
+	         beratantro.setPlus(rs.getString("bt.plus1sd"));
+	         beratantro.setBerat(rs.getString("b.berat_balita"));
+	         beratantro.setTinggi(rs.getString("t.tinggi_balita"));
+	         beratantro.setUmur(rs.getString("t.umur"));
+	         
+	         
+	         Float z;
+	         Float nilai_rujukan;
+	         
+	         if(berat < median){
+	        	 nilai_rujukan = median - minus;
+	         }else if(berat > median){
+	        	 nilai_rujukan = plus - median;
+	         }else{
+	        	 nilai_rujukan = median;
+	         }
+	         		         
+	         z = (berat - median) / nilai_rujukan;
+	         
+	         if(z < -3){
+	        	 beratantro.setStatus("Sangat Kurus");
+	         }else if(z >= -3 && z < -2){
+	        	 beratantro.setStatus("Kurus");
+	         }else if(z >= -2 && z <= 2){
+	        	 beratantro.setStatus("Normal");
+	         }else{
+	        	 beratantro.setStatus("Gemuk");
+	         }
+	         
+	         beratantros.add(beratantro);
+		}
+		
+		c.close();
+		
+		model.addAttribute("balita", balita);
+        model.addAttribute("beratBalitas", beratantros);
+        
+        return "/balita/berattinggi";
             
     }
 }

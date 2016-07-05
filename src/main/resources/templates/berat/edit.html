@@ -29,14 +29,14 @@
 							<div class="form-group ">
 								<label for="panjang" class="control-label col-lg-2">Umur (Bulan)</label>
 								<div class="col-lg-10">
-									<input type="text" th:field="*{umur}" required="required" readonly=""
+									<input type="number" min="0" max="59" th:field="*{umur}" required="required" readonly=""
 										class="form-control" />
 								</div>
 							</div>
 							<div class="form-group ">
 								<label for="panjang" class="control-label col-lg-2">Berat (Kg)</label>
 								<div class="col-lg-10">
-									<input type="text" th:field="*{beratBalita}" required="required"
+									<input type="number" th:field="*{beratBalita}" required="required"
 										class="form-control" />
 								</div>
 							</div>
