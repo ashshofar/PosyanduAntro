@@ -48,12 +48,17 @@ public class UserController {
     @RequestMapping(value = {"/user/save"}, method = RequestMethod.POST)
     public String saveUser(@ModelAttribute("user") User user,
             final RedirectAttributes redirectAttributes) {
-
+    	
+       user.setActive(true);
+  	   user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+  	   
         if (userService.saveUser(user) != null) {
             redirectAttributes.addFlashAttribute("save", "success");
         } else {
             redirectAttributes.addFlashAttribute("save", "unsuccess");
         }
+        
+       
 
         return "redirect:/user";
     }

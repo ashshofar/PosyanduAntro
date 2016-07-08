@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -33,15 +34,17 @@ public class AssigmentController {
 	@Autowired
 	JabatanService jabatanService;
 	
+	@PreAuthorize("hasAnyAuthority('Admin')")
 	@RequestMapping(value = {"/assigment"}, method = RequestMethod.GET)
     public String index(Model model) {
         
-        model.addAttribute("allAssigments", (ArrayList<Assigment>) assigmentService.getAllAssigments());
+		model.addAttribute("allAssigments", (ArrayList<Assigment>) assigmentService.getAllAssigments());
         model.addAttribute("allUsers", (Collection<User>) userService.getAllUsers());
         model.addAttribute("allJabatans", (Collection<Jabatan>) jabatanService.getAllJabatans());
         return "/assigment/index";
     }
 	
+	@PreAuthorize("hasAnyAuthority('Admin')")
 	@RequestMapping(value = "/assigment/create", method = RequestMethod.GET)
     public String viewForm(Model model){
         
@@ -52,6 +55,7 @@ public class AssigmentController {
         return "/assigment/create";
     }
 	
+	@PreAuthorize("hasAnyAuthority('Admin')")
 	@RequestMapping(value = {"/assigment/save"}, method = RequestMethod.POST)
     public String saveAssigment(@ModelAttribute("assigment") Assigment assigment,
             final RedirectAttributes redirectAttributes) {
@@ -65,6 +69,7 @@ public class AssigmentController {
         return "redirect:/assigment";
     }
 	
+	@PreAuthorize("hasAnyAuthority('Admin')")
 	@RequestMapping(value = "/assigment/{operation}/{assigmentId}", method = RequestMethod.GET)
     public String editRemoveBalita(@PathVariable("operation") String operation,
             @PathVariable("assigmentId") String assigmentId, final RedirectAttributes redirectAttributes,
@@ -98,6 +103,7 @@ public class AssigmentController {
         return "redirect:/assigment";
     }
 	
+	@PreAuthorize("hasAnyAuthority('Admin')")
 	@RequestMapping(value = "/assigment/update/{assigmentId}", method = RequestMethod.POST)
 	public String updateBalita(@PathVariable("assigmentId") String assigmentId, 
 	    		Assigment assigment, 

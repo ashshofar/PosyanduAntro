@@ -148,6 +148,5 @@ public class User {
 		this.daftarIbu = daftarIbu;
 	}
     
-    
-
+	
 }
