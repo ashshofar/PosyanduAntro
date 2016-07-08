@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,7 +22,8 @@ public class PbuController {
 	
 	@Autowired
     private PbuService pbuService;
-
+	
+	@PreAuthorize("hasAnyAuthority('Admin', 'Bidan')")
 	@RequestMapping(value = {"/pbu"}, method = RequestMethod.GET)
     public String index(Model model){
         model.addAttribute("allPbuL", (Collection<Panjangbadanumur>) pbuService.getAllPBULs());
@@ -30,6 +32,7 @@ public class PbuController {
         return "/pbu/index";
     }
     
+	@PreAuthorize("hasAnyAuthority('Admin', 'Bidan')")
     @RequestMapping(value = "/pbu/create", method = RequestMethod.GET)
     public String viewForm(Model model){
         
@@ -38,6 +41,7 @@ public class PbuController {
         return "/pbu/create";
     }
     
+	@PreAuthorize("hasAnyAuthority('Admin', 'Bidan')")
     @RequestMapping(value = {"/pbu/save"}, method = RequestMethod.POST)
     public String savePBU(@ModelAttribute("tbu") Panjangbadanumur pbu,
             final RedirectAttributes redirectAttributes) {
@@ -51,6 +55,7 @@ public class PbuController {
         return "redirect:/pbu";
     }
     
+	@PreAuthorize("hasAnyAuthority('Admin', 'Bidan')")
     @RequestMapping(value = "/pbu/{operation}/{id}", method = RequestMethod.GET)
     public String editRemovePBU(@PathVariable("operation") String operation,
             @PathVariable("id") String id, final RedirectAttributes redirectAttributes,
@@ -82,6 +87,7 @@ public class PbuController {
         return "redirect:/pbu";
     }
     
+	@PreAuthorize("hasAnyAuthority('Admin', 'Bidan')")
     @RequestMapping(value = "/pbu/update/{id}", method = RequestMethod.POST)
     public String update(@PathVariable("id") String id, 
     		Panjangbadanumur pbu,

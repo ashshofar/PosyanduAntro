@@ -8,7 +8,7 @@
 				<div class="panel-body">
 					<div th:replace="/fragments/alert"></div>
 					<a th:href="@{/bbt/create}">
-					<button type="button" class="btn btn-primary">
+					<button type="button" class="btn btn-primary" th:if="*{infoUser.currentRole} == '[Admin]'">
 							<i class="glyphicon glyphicon-plus"></i> &nbsp;Tambah Data
 					</button>
 					</a>
@@ -71,7 +71,7 @@
 													</form>
 												
 													<form class="form-inline"
-														th:action="@{/bbt/delete/{id}(id=${data.id})}"
+														th:action="@{/bbt/delete/{id}(id=${data.id})}" th:if="*{infoUser.currentRole} == '[Admin]'"
 														th:object="${data}" method="get" id="formhapus">
 														<button type="submit" class="btn btn-danger btn-xs" id="formhapus"><i class="icon-trash "></i></button>
 													</form>
@@ -140,7 +140,7 @@
 													</form>
 												
 													<form class="form-inline"
-														th:action="@{/bbp/delete/{id}(id=${data.id})}"
+														th:action="@{/bbp/delete/{id}(id=${data.id})}" th:if="*{infoUser.currentRole} == '[Admin]'"
 														th:object="${data}" method="get" id="formhapus">
 														<button type="submit" class="btn btn-danger btn-xs" id="formhapus"><i class="icon-trash "></i></button>
 													</form>

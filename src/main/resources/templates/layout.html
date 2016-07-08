@@ -55,17 +55,17 @@
 					<li >
 						<a href="index.html" > <i class="icon-dashboard"></i> <span>Dashboard</span></a>
 					</li>
-					<li class="sub-menu">
+					<li class="sub-menu" th:if="*{infoUser.currentRole} == '[Rw]' or *{infoUser.currentRole} == '[Admin]' or *{infoUser.currentRole} == '[Petugas]'">
                       <a href="javascript:;"  th:classappend="${#httpServletRequest.getRequestURI().startsWith('/user') ? 'active':''}" >
                           <i class="icon-user"></i>
                           <span>Pengguna</span>
                       </a>
                       <ul class="sub">
-                     	  <li><a th:href="@{/user/}">Semua Pengguna</a></li>
-                          <li><a th:href="@{/user/orangtua}">Orangtua</a></li>
-                          <li><a th:href="@{/user/petugas}">Petugas</a></li>
-                          <li><a th:href="@{/user/bidan}">Bidan</a></li>
-                          <li><a th:href="@{/user/rw}">Rw</a></li>
+                     	  <li th:if="*{infoUser.currentRole} == '[Admin]'"><a th:href="@{/user/}">Semua Pengguna</a></li>
+                          <li th:if="*{infoUser.currentRole} == '[Rw]' or *{infoUser.currentRole} == '[Admin]' or *{infoUser.currentRole} == '[Petugas]'"><a th:href="@{/user/orangtua}">Orangtua</a></li>
+                          <li th:if="*{infoUser.currentRole} == '[Rw]' or *{infoUser.currentRole} == '[Admin]'"><a th:href="@{/user/petugas}">Petugas</a></li>
+                          <li th:if="*{infoUser.currentRole} == '[Rw]' or *{infoUser.currentRole} == '[Admin]'"><a th:href="@{/user/bidan}">Bidan</a></li>
+                          <li th:if="*{infoUser.currentRole} == '[Admin]'"><a th:href="@{/user/rw}">Rw</a></li>
                           
                       </ul>
                   	</li>

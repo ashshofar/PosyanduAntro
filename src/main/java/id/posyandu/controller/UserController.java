@@ -30,6 +30,7 @@ public class UserController {
     @Autowired
     AssigmentService assigmentService;
     
+   @PreAuthorize("hasAnyAuthority('Admin')") 
    @RequestMapping(value = {"/user"}, method = RequestMethod.GET)
     public String index(Model model) {
         
@@ -37,6 +38,7 @@ public class UserController {
         return "/user/index";
     }
     
+   
     @PreAuthorize("hasAuthority('Admin')")
     @RequestMapping(value = "/user/create", method = RequestMethod.GET)
     public String viewForm(Model model){
@@ -116,6 +118,7 @@ public class UserController {
     * 
     */
    
+   @PreAuthorize("hasAnyAuthority('Admin', 'Rw')")
    @RequestMapping(value = {"/user/petugas"}, method = RequestMethod.GET)
    public String indexPetugas(Model model) {
        
@@ -123,6 +126,7 @@ public class UserController {
        return "/user/petugas/index";
    }
    
+   @PreAuthorize("hasAnyAuthority('Admin', 'Rw')")
    @RequestMapping(value = "/user/petugas/create", method = RequestMethod.GET)
    public String viewFormPetugas(Model model){
        
@@ -130,6 +134,7 @@ public class UserController {
       return "/user/petugas/create";
    }
    
+   @PreAuthorize("hasAnyAuthority('Admin', 'Rw')")
    @RequestMapping(value = {"/user/petugas/save"}, method = RequestMethod.POST)
    public String savePetugas(@ModelAttribute("user") User user, 
 		   Assigment assigment,
@@ -154,6 +159,7 @@ public class UserController {
        return "redirect:/user/petugas";
    }
    
+   @PreAuthorize("hasAnyAuthority('Admin', 'Rw')")
    @RequestMapping(value = "/user/petugas/{operation}/{userId}", method = RequestMethod.GET)
    public String editRemovePetugas(@PathVariable("operation") String operation,
            @PathVariable("userId") String userId, final RedirectAttributes redirectAttributes,
@@ -184,7 +190,8 @@ public class UserController {
 
        return "redirect:/user/petugas";
    }
-   
+  
+  @PreAuthorize("hasAnyAuthority('Admin', 'Rw')")
   @RequestMapping(value = "/user/petugas/update/{userId}", method = RequestMethod.POST)
   public String updatePetugas(@PathVariable("userId") String userId, 
 		    User user,    		
@@ -207,6 +214,7 @@ public class UserController {
    * 
    */
   
+  @PreAuthorize("hasAnyAuthority('Admin', 'Rw', 'Petugas')")
   @RequestMapping(value = {"/user/orangtua"}, method = RequestMethod.GET)
   public String indexOrangtua(Model model) {
       
@@ -214,6 +222,7 @@ public class UserController {
       return "/user/orangtua/index";
   }
   
+  @PreAuthorize("hasAnyAuthority('Admin', 'Rw')")
   @RequestMapping(value = "/user/orangtua/create", method = RequestMethod.GET)
   public String viewFormOrangtua(Model model){
       
@@ -221,6 +230,7 @@ public class UserController {
      return "/user/orangtua/create";
   }
   
+  @PreAuthorize("hasAnyAuthority('Admin', 'Rw')")
   @RequestMapping(value = {"/user/orangtua/save"}, method = RequestMethod.POST)
   public String saveOrangtua(@ModelAttribute("user") User user, 
 		   Assigment assigment,
@@ -245,6 +255,7 @@ public class UserController {
       return "redirect:/user/orangtua";
   }
   
+  @PreAuthorize("hasAnyAuthority('Admin', 'Rw')")
   @RequestMapping(value = "/user/orangtua/{operation}/{userId}", method = RequestMethod.GET)
   public String editRemoveOrangtua(@PathVariable("operation") String operation,
           @PathVariable("userId") String userId, final RedirectAttributes redirectAttributes,
@@ -275,7 +286,8 @@ public class UserController {
 
       return "redirect:/user/orangtua";
   }
-  
+ 
+ @PreAuthorize("hasAnyAuthority('Admin', 'Rw')")
  @RequestMapping(value = "/user/orangtua/update/{userId}", method = RequestMethod.POST)
  public String updateOrangtua(@PathVariable("userId") String userId, 
 		    User user,    		
@@ -298,6 +310,7 @@ public class UserController {
   * 
   */
  
+ @PreAuthorize("hasAnyAuthority('Admin')") 
  @RequestMapping(value = {"/user/rw"}, method = RequestMethod.GET)
  public String indexRw(Model model) {
      
@@ -305,6 +318,7 @@ public class UserController {
      return "/user/rw/index";
  }
  
+ @PreAuthorize("hasAnyAuthority('Admin')") 
  @RequestMapping(value = "/user/rw/create", method = RequestMethod.GET)
  public String viewFormRw(Model model){
      
@@ -312,6 +326,7 @@ public class UserController {
     return "/user/rw/create";
  }
  
+ @PreAuthorize("hasAnyAuthority('Admin')") 
  @RequestMapping(value = {"/user/rw/save"}, method = RequestMethod.POST)
  public String saveRw(@ModelAttribute("user") User user, 
 		   Assigment assigment,
@@ -336,6 +351,7 @@ public class UserController {
      return "redirect:/user/rw";
  }
  
+ @PreAuthorize("hasAnyAuthority('Admin')") 
  @RequestMapping(value = "/user/rw/{operation}/{userId}", method = RequestMethod.GET)
  public String editRemoveRw(@PathVariable("operation") String operation,
          @PathVariable("userId") String userId, final RedirectAttributes redirectAttributes,
@@ -366,7 +382,8 @@ public class UserController {
 
      return "redirect:/user/rw";
  }
- 
+
+ @PreAuthorize("hasAnyAuthority('Admin')") 
 @RequestMapping(value = "/user/rw/update/{userId}", method = RequestMethod.POST)
 public String updateRw(@PathVariable("userId") String userId, 
 		    User user,    		
@@ -388,6 +405,7 @@ public String updateRw(@PathVariable("userId") String userId,
  * 
  */
 
+@PreAuthorize("hasAnyAuthority('Admin', 'Rw')")
 @RequestMapping(value = {"/user/bidan"}, method = RequestMethod.GET)
 public String indexBidan(Model model) {
     
@@ -395,6 +413,7 @@ public String indexBidan(Model model) {
     return "/user/bidan/index";
 }
 
+@PreAuthorize("hasAnyAuthority('Admin', 'Rw')")
 @RequestMapping(value = "/user/bidan/create", method = RequestMethod.GET)
 public String viewFormBidan(Model model){
     
@@ -402,6 +421,7 @@ public String viewFormBidan(Model model){
    return "/user/bidan/create";
 }
 
+@PreAuthorize("hasAnyAuthority('Admin', 'Rw')")
 @RequestMapping(value = {"/user/bidan/save"}, method = RequestMethod.POST)
 public String saveBidan(@ModelAttribute("user") User user, 
 		   Assigment assigment,
@@ -425,6 +445,7 @@ public String saveBidan(@ModelAttribute("user") User user,
     return "redirect:/user/bidan";
 }
 
+@PreAuthorize("hasAnyAuthority('Admin', 'Rw')")
 @RequestMapping(value = "/user/bidan/{operation}/{userId}", method = RequestMethod.GET)
 public String editRemoveBidan(@PathVariable("operation") String operation,
         @PathVariable("userId") String userId, final RedirectAttributes redirectAttributes,
@@ -456,6 +477,7 @@ public String editRemoveBidan(@PathVariable("operation") String operation,
     return "redirect:/user/bidan";
 }
 
+@PreAuthorize("hasAnyAuthority('Admin', 'Rw')")
 @RequestMapping(value = "/user/bidan/update/{userId}", method = RequestMethod.POST)
 public String updateBidan(@PathVariable("userId") String userId, 
 		    User user,    		

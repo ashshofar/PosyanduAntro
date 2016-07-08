@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,7 +22,8 @@ public class TbuController {
 
 	@Autowired
     private TbuService tbuService;
-
+	
+	@PreAuthorize("hasAnyAuthority('Admin', 'Bidan')")
 	@RequestMapping(value = {"/tbu"}, method = RequestMethod.GET)
     public String index(Model model){
         model.addAttribute("allTbuL", (Collection<Tinggibadanumur>) tbuService.getAllTBULs());
@@ -30,6 +32,7 @@ public class TbuController {
         return "/tbu/index";
     }
     
+	@PreAuthorize("hasAnyAuthority('Admin', 'Bidan')")
     @RequestMapping(value = "/tbu/create", method = RequestMethod.GET)
     public String viewForm(Model model){
         
@@ -38,6 +41,7 @@ public class TbuController {
         return "/tbu/create";
     }
     
+	@PreAuthorize("hasAnyAuthority('Admin', 'Bidan')")
     @RequestMapping(value = {"/tbu/save"}, method = RequestMethod.POST)
     public String saveTBU(@ModelAttribute("tbu") Tinggibadanumur tbu,
             final RedirectAttributes redirectAttributes) {
@@ -51,6 +55,7 @@ public class TbuController {
         return "redirect:/tbu";
     }
     
+	@PreAuthorize("hasAnyAuthority('Admin', 'Bidan')")
     @RequestMapping(value = "/tbu/{operation}/{id}", method = RequestMethod.GET)
     public String editRemoveTBU(@PathVariable("operation") String operation,
             @PathVariable("id") String id, final RedirectAttributes redirectAttributes,
@@ -82,6 +87,7 @@ public class TbuController {
         return "redirect:/tbu";
     }
     
+	@PreAuthorize("hasAnyAuthority('Admin', 'Bidan')")
     @RequestMapping(value = "/tbu/update/{id}", method = RequestMethod.POST)
     public String update(@PathVariable("id") String id, 
     		Tinggibadanumur tbu,

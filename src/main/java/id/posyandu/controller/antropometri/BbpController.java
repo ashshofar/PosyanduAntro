@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,7 +22,8 @@ public class BbpController {
 	
 	@Autowired
     private BbpService bbpService;
-
+	
+	@PreAuthorize("hasAnyAuthority('Admin', 'Bidan')")
 	@RequestMapping(value = {"/bbp"}, method = RequestMethod.GET)
     public String index(Model model){
         model.addAttribute("allBbpL", (Collection<Beratbadanpanjang>) bbpService.getAllBBPLs());
@@ -30,6 +32,7 @@ public class BbpController {
         return "/bbp/index";
     }
     
+	@PreAuthorize("hasAnyAuthority('Admin', 'Bidan')")
     @RequestMapping(value = "/bbp/create", method = RequestMethod.GET)
     public String viewForm(Model model){
         
@@ -38,6 +41,7 @@ public class BbpController {
         return "/bbp/create";
     }
     
+	@PreAuthorize("hasAnyAuthority('Admin', 'Bidan')")
     @RequestMapping(value = {"/bbp/save"}, method = RequestMethod.POST)
     public String saveBBP(@ModelAttribute("bbp") Beratbadanpanjang bbp,
             final RedirectAttributes redirectAttributes) {
@@ -51,6 +55,7 @@ public class BbpController {
         return "redirect:/bbp";
     }
     
+	@PreAuthorize("hasAnyAuthority('Admin', 'Bidan')")
     @RequestMapping(value = "/bbp/{operation}/{id}", method = RequestMethod.GET)
     public String editRemoveBBP(@PathVariable("operation") String operation,
             @PathVariable("id") String id, final RedirectAttributes redirectAttributes,
@@ -82,6 +87,7 @@ public class BbpController {
         return "redirect:/bbp";
     }
     
+	@PreAuthorize("hasAnyAuthority('Admin', 'Bidan')")
     @RequestMapping(value = "/bbp/update/{id}", method = RequestMethod.POST)
     public String update(@PathVariable("id") String id, 
     		Beratbadanpanjang bbp,

@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,7 +22,8 @@ public class BbuController {
 	
 	@Autowired
     private BbuService bbuService;
-
+	
+	@PreAuthorize("hasAnyAuthority('Admin', 'Bidan')")
 	@RequestMapping(value = {"/bbu"}, method = RequestMethod.GET)
     public String index(Model model){
         model.addAttribute("allBbuL", (Collection<Beratbadanumur>) bbuService.getAllBBULs());
@@ -30,6 +32,7 @@ public class BbuController {
         return "/bbu/index";
     }
     
+	@PreAuthorize("hasAnyAuthority('Admin', 'Bidan')")
     @RequestMapping(value = "/bbu/create", method = RequestMethod.GET)
     public String viewForm(Model model){
         
@@ -38,6 +41,7 @@ public class BbuController {
         return "/bbu/create";
     }
     
+	@PreAuthorize("hasAnyAuthority('Admin', 'Bidan')")
     @RequestMapping(value = {"/bbu/save"}, method = RequestMethod.POST)
     public String saveBBU(@ModelAttribute("bbu") Beratbadanumur bbu,
             final RedirectAttributes redirectAttributes) {
@@ -51,6 +55,7 @@ public class BbuController {
         return "redirect:/bbu";
     }
     
+	@PreAuthorize("hasAnyAuthority('Admin', 'Bidan')")
     @RequestMapping(value = "/bbu/{operation}/{id}", method = RequestMethod.GET)
     public String editRemoveBBU(@PathVariable("operation") String operation,
             @PathVariable("id") String id, final RedirectAttributes redirectAttributes,
@@ -82,6 +87,7 @@ public class BbuController {
         return "redirect:/bbu";
     }
     
+	@PreAuthorize("hasAnyAuthority('Admin', 'Bidan')")
     @RequestMapping(value = "/bbu/update/{id}", method = RequestMethod.POST)
     public String update(@PathVariable("id") String bbuId, 
     		Beratbadanumur bbu,

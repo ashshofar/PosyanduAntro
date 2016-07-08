@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,7 +22,8 @@ public class BbtController {
 	
 	@Autowired
     private BbtService bbtService;
-
+	
+	@PreAuthorize("hasAnyAuthority('Admin', 'Bidan')")
 	@RequestMapping(value = {"/bbt"}, method = RequestMethod.GET)
     public String index(Model model){
         model.addAttribute("allBbtL", (Collection<Beratbadantinggi>) bbtService.getAllBBTLs());
@@ -30,6 +32,7 @@ public class BbtController {
         return "/bbt/index";
     }
     
+	@PreAuthorize("hasAnyAuthority('Admin', 'Bidan')")
     @RequestMapping(value = "/bbt/create", method = RequestMethod.GET)
     public String viewForm(Model model){
         
@@ -38,6 +41,7 @@ public class BbtController {
         return "/bbt/create";
     }
     
+	@PreAuthorize("hasAnyAuthority('Admin', 'Bidan')")
     @RequestMapping(value = {"/bbt/save"}, method = RequestMethod.POST)
     public String saveBBT(@ModelAttribute("bbt") Beratbadantinggi bbt,
             final RedirectAttributes redirectAttributes) {
@@ -51,6 +55,7 @@ public class BbtController {
         return "redirect:/bbt";
     }
     
+	@PreAuthorize("hasAnyAuthority('Admin', 'Bidan')")
     @RequestMapping(value = "/bbt/{operation}/{id}", method = RequestMethod.GET)
     public String editRemoveBBT(@PathVariable("operation") String operation,
             @PathVariable("id") String id, final RedirectAttributes redirectAttributes,
@@ -82,6 +87,7 @@ public class BbtController {
         return "redirect:/bbt";
     }
     
+	@PreAuthorize("hasAnyAuthority('Admin', 'Bidan')")
     @RequestMapping(value = "/bbt/update/{id}", method = RequestMethod.POST)
     public String update(@PathVariable("id") String id, 
     		Beratbadantinggi bbt,
