@@ -48,6 +48,12 @@ public class BalitaServiceImplementation implements BalitaService{
 		Iterable<Balita> itr = balitaRepository.findAll();
         return (Collection<Balita>) itr;
 	}
+
+	@Override
+	public Collection<Balita> getBalitasByOrangTua(String idIbu, String idAyah) {
+		Iterable<Balita> itr = balitaRepository.findBalitaByOrangtua(idIbu, idAyah);
+        return (Collection<Balita>) itr;
+	}
 	
 	
 }

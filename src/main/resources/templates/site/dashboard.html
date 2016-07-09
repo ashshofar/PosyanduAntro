@@ -1,0 +1,69 @@
+<div th:fragment="content">
+	<!--state overview start-->
+	<div class="row state-overview">
+		<div class="col-lg-3 col-sm-6">
+			<section class="panel">
+				<div class="symbol terques">
+					<i class="icon-user"></i>
+				</div>
+				<div class="value">
+					<h1 th:text="${jumlahorangtua}"></h1>
+					<p>Jumlah Orangtua</p>
+				</div>
+			</section>
+		</div>
+		<div class="col-lg-3 col-sm-6">
+			<section class="panel">
+				<div class="symbol red">
+					<i class="icon-github-alt"></i>
+				</div>
+				<div class="value">
+					<h1 th:text="${jumlahlaki}"></h1>
+					<p>Balita Laki-Laki</p>
+				</div>
+			</section>
+		</div>
+		<div class="col-lg-3 col-sm-6">
+			<section class="panel">
+				<div class="symbol yellow">
+					<i class="icon-github-alt"></i>
+				</div>
+				<div class="value">
+					<h1 th:text="${jumlahperempuan}"></h1>
+					<p>Balita Perempuan</p>
+				</div>
+			</section>
+		</div>
+		<div class="col-lg-3 col-sm-6">
+			<section class="panel">
+				<div class="symbol blue">
+					<i class="icon-bar-chart"></i>
+				</div>
+				<div class="value">
+					<h1 th:text="${jumlahbalita}"></h1>
+					<p>Total Balita</p>
+				</div>
+			</section>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-6" th:each="data : ${allBalitas}">
+			<!--user info table start-->
+			<section class="panel">
+				<div class="panel-body">
+					<a th:href="@{/balita/view/{id}(id=${data.balitaId})}" class="task-thumb"> <img src="img/avatar1.jpg"
+						alt="" />
+					</a>
+					<div class="task-thumb-details">
+						<h1>
+							<a th:href="@{/balita/view/{id}(id=${data.balitaId})}" th:text="${data.nama}"></a>
+						</h1>
+						<p th:text="${data.jenisKelamin}"></p>
+					</div>
+				</div>
+			</section>
+			<!--user info table end-->
+		</div>
+	</div>
+	<!--state overview end-->
+</div>

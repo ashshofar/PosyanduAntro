@@ -53,7 +53,7 @@
 				<!-- sidebar menu start-->
 				<ul class="sidebar-menu" id="nav-accordion">
 					<li >
-						<a href="index.html" > <i class="icon-dashboard"></i> <span>Dashboard</span></a>
+						<a th:href="@{/dashboard}" > <i class="icon-dashboard"></i> <span>Dashboard</span></a>
 					</li>
 					<li class="sub-menu" th:if="*{infoUser.currentRole} == '[Rw]' or *{infoUser.currentRole} == '[Admin]' or *{infoUser.currentRole} == '[Petugas]'">
                       <a href="javascript:;"  th:classappend="${#httpServletRequest.getRequestURI().startsWith('/user') ? 'active':''}" >
