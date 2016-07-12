@@ -28,4 +28,6 @@ public interface UserService {
     public Collection<User> getAllAyahs();
     
     public Collection<User> getAllIbus();
+
+	public User findOneByUsername (String username);
 }

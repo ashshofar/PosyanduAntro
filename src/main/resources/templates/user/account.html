@@ -1,0 +1,71 @@
+<div th:fragment="content">
+	<div class="row">
+		<aside class="profile-nav col-lg-3">
+			<section class="panel">
+				<div class="user-heading round">
+					<a href="#"> <img src="/img/ayana3.jpg" alt=""/>
+					</a>
+					<h1><label th:text="${infoUser.user.nama}"></label></h1>
+					<p th:text="${infoUser.currentRole}"></p>
+				</div>
+
+				<ul class="nav nav-pills nav-stacked">
+					<li><a href="profile-edit.html"> <i class="icon-edit"></i>
+							Edit profile
+					</a>
+					</li>
+				</ul>
+
+			</section>
+		</aside>
+		<aside class="profile-info col-lg-9">
+			<section class="panel">
+				<div class="bio-graph-heading">PROFILE PENGGUNA</div>
+				<div class="panel-body bio-graph-info">
+					<h1>Biodata</h1>
+					<div class="row">
+						<div class="bio-row">
+							<p>
+								<span>Nama </span>: <label th:text="${infoUser.user.nama}"></label>
+							</p>
+						</div>
+						<div class="bio-row">
+							<p>
+								<span>Jenis Kelamin</span>: <label th:text="${infoUser.user.jenisKelamin}"></label>
+							</p>
+						</div>
+						<div class="bio-row">
+							<p>
+								<span>Tempat Lahir </span>: <label th:text="${infoUser.user.rt}"></label>
+							</p>
+						</div>
+						<div class="bio-row">
+							<p>
+								<span>Nama Ayah </span>: <label th:text="${infoUser.user.telepon}"></label>
+							</p>
+						</div>
+					</div>
+				</div>
+			</section>
+			<div class="row">
+				<div class="col-lg-6" th:each="data : ${allBalitas}">
+					<!--user info table start-->
+							<section class="panel">
+								<div class="panel-body">
+									<a th:href="@{/balita/view/{id}(id=${data.balitaId})}" class="task-thumb"> <img src="/img/avatar1.jpg"
+										alt="" />
+									</a>
+									<div class="task-thumb-details">
+										<h1>
+											<a th:href="@{/balita/view/{id}(id=${data.balitaId})}" th:text="${data.nama}"></a>
+										</h1>
+										<p th:text="${data.jenisKelamin}"></p>
+									</div>
+								</div>
+							</section>
+					<!--user info table end-->
+				</div>
+			</div>
+		</aside>
+	</div>
+</div>

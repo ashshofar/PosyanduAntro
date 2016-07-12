@@ -90,4 +90,10 @@ public class UserServiceImplementation implements UserService {
 		Iterable<User> itr = userRepository.findIbu();
         return (Collection<User>) itr;
 	}
+
+	@Override
+	public User findOneByUsername(String username) {
+		User user = userRepository.findByUsername(username);
+		return this.userRepository.findOne(user.getUserId());
+	}
 }

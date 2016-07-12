@@ -2,6 +2,7 @@ package id.posyandu.repositories;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import id.posyandu.domain.User;
 
@@ -27,5 +28,8 @@ public interface UserRepository extends CrudRepository<User, String>{
 	
 	@Query(value = "SELECT * FROM user WHERE jenis_kelamin='Perempuan'", nativeQuery = true)
 	Iterable<User> findIbu();
+	
+	@Query(value = "SELECT * FROM user WHERE username = :username", nativeQuery = true)
+	User findByUsername(@Param("username") String Username);
 
 }

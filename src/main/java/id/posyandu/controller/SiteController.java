@@ -1,5 +1,6 @@
 package id.posyandu.controller;
 
+import java.security.Principal;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,17 +11,16 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import id.posyandu.domain.User;
 import id.posyandu.domain.Balita;
-
+import id.posyandu.repositories.UserRepository;
 import id.posyandu.service.BalitaService;
+import id.posyandu.service.UserService;
 
 @Controller
 @ComponentScan
@@ -30,13 +30,19 @@ public class SiteController {
 	DataSource ds;
 	
 	@Autowired
+	UserRepository userRepository;
+	
+	@Autowired
+	UserService userService;
+	
+	@Autowired
 	BalitaService balitaService;
 	
 	//@PreAuthorize("hasAnyAuthority('Admin')")
 	@RequestMapping(value = {"/dashboard"}, method = RequestMethod.GET)
 	public String dashboard(Model model) throws SQLException {
 		
-		Authentication authentication  = SecurityContextHolder.getContext().getAuthentication();
+		//Authentication authentication  = SecurityContextHolder.getContext().getAuthentication();
 		//User user = (User)authentication.getPrincipal();
 		//String userId = user.getUserId();
 		
@@ -95,5 +101,18 @@ public class SiteController {
 		model.addAttribute("allBalitas", (ArrayList<Balita>) balitaService.getAllBalitas());
 		
 		return "/site/dashboard";
+	}
+	
+	
+	@RequestMapping(value = {"/account"}, method = RequestMethod.GET)
+	public String Account(Principal principal, Model model){
+		String username = principal.getName();
+		
+		User user = userRepository.findByUsername(username);
+		
+		model.addAttribute("allBalitas", (ArrayList<Balita>) balitaService.getBalitasByOrangTua(user.getUserId(), user.getUserId()));
+		
+		
+		return "user/account";
 	}
 }

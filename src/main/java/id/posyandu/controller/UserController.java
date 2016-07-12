@@ -65,6 +65,13 @@ public class UserController {
         return "redirect:/user";
     }
     
+    @RequestMapping(value = "/user/view/{userId}", method = RequestMethod.GET)
+    public String viewUser(@PathVariable("userId") String userId, Model model){
+    	User user = userService.findUser(userId);
+    	model.addAttribute("user", user);
+    	return "/user/view";
+    }
+    
     @RequestMapping(value = "/user/{operation}/{userId}", method = RequestMethod.GET)
     public String editRemoveUser(@PathVariable("operation") String operation,
             @PathVariable("userId") String userId, final RedirectAttributes redirectAttributes,
@@ -83,15 +90,7 @@ public class UserController {
             } else {
                 redirectAttributes.addFlashAttribute("status", "notfound");
             }
-        } else if (operation.equals("view")) {
-            User user = userService.findUser(userId);
-            if (user != null) {
-                model.addAttribute("user", user);
-                return "/user/view";
-            } else {
-                redirectAttributes.addFlashAttribute("status", "notfound");
-            }
-        }
+        } 
 
         return "redirect:/user";
     }
