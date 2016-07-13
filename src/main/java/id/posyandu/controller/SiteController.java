@@ -100,7 +100,7 @@ public class SiteController {
 		//model.addAttribute("allBalitas", (ArrayList<Balita>) balitaService.getBalitasByOrangTua(userId, userId));
 		model.addAttribute("allBalitas", (ArrayList<Balita>) balitaService.getAllBalitas());
 		
-		return "/site/dashboard";
+		return "site/dashboard";
 	}
 	
 	
