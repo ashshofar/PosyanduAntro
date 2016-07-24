@@ -20,6 +20,10 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 
 @Entity
 @Table(name = "balita")
@@ -43,16 +47,24 @@ public class Balita {
     
     @ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.MERGE)
     @JoinColumn
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "nama")
+    @JsonIdentityReference(alwaysAsId = true)
     private User ayah;
     
     @ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.MERGE)
     @JoinColumn
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "nama")
+    @JsonIdentityReference(alwaysAsId = true)
     private User ibu;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy="idBalita")
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "beratBalita")
+    @JsonIdentityReference(alwaysAsId = true)
     private List<Berat> daftarBerat = new ArrayList<>();
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy="idBalita")
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "tinggiBalita")
+    @JsonIdentityReference(alwaysAsId = true)
     private List<Tinggi> daftarTinggi = new ArrayList<>();
     
     @Transient 

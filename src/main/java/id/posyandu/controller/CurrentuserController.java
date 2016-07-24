@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import id.posyandu.service.UserService;
 
-@ControllerAdvice
+//@ControllerAdvice
 public class CurrentuserController {
 	
 	@Autowired

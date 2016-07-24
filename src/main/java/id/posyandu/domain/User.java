@@ -13,6 +13,10 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name = "user")
 public class User {
@@ -41,15 +45,21 @@ public class User {
     private String password;
     
     @OneToMany(cascade=CascadeType.ALL, mappedBy="idUser")
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "assigmentId")
+    @JsonIdentityReference(alwaysAsId = true)
     private List<Assigment> daftarAssigmentUser = new ArrayList<>();
     
     @Column(nullable = false)
     private boolean active;
     
     @OneToMany(cascade = CascadeType.MERGE, mappedBy="ayah")
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "nama")
+    @JsonIdentityReference(alwaysAsId = true)
     private List<Balita> daftarAyah = new ArrayList<>();
     
     @OneToMany(cascade = CascadeType.MERGE, mappedBy="ibu")
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "nama")
+    @JsonIdentityReference(alwaysAsId = true)
     private List<Balita> daftarIbu = new ArrayList<>();
 
 	public String getUserId() {
