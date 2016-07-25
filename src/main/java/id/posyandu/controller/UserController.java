@@ -1,6 +1,10 @@
 package id.posyandu.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -8,10 +12,13 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import id.posyandu.domain.Assigment;
@@ -232,9 +239,33 @@ public class UserController {
   @PreAuthorize("hasAnyAuthority('Admin', 'Rw')")
   @RequestMapping(value = {"/user/orangtua/save"}, method = RequestMethod.POST)
   public String saveOrangtua(@ModelAttribute("user") User user, 
+		  BindingResult errors,
+		  @RequestParam("foto") MultipartFile foto, 
+		   HttpSession session,
 		   Assigment assigment,
 		   Jabatan jabatan,
-		   final RedirectAttributes redirectAttributes) {
+		   final RedirectAttributes redirectAttributes) throws IllegalStateException, IOException{
+	  
+	  
+	  String namaFile = foto.getName();
+      String jenisFile = foto.getContentType();
+      String namaAsli = foto.getOriginalFilename();
+      Long ukuran = foto.getSize();
+      
+      String lokasiPath = "/upload";
+      String lokasiTomcat = session.getServletContext().getRealPath(lokasiPath);
+      System.out.println("Lokasi Tomcat dijalankan : "+lokasiTomcat);
+      String lokasiTujuan = lokasiTomcat + File.separator;
+      
+      File folderTujuan = new File(lokasiTujuan);
+      if(!folderTujuan.exists()){
+          folderTujuan.mkdirs();
+      }
+      File tujuan = new File(lokasiTujuan + File.separator + namaAsli);
+      
+      foto.transferTo(tujuan);
+      
+      
 	   
 	   if (userService.saveUser(user) != null) {
           redirectAttributes.addFlashAttribute("save", "success");
@@ -242,6 +273,8 @@ public class UserController {
           redirectAttributes.addFlashAttribute("save", "unsuccess");
       }
 	   
+	   
+	   user.setFoto(lokasiTujuan + File.separator + namaAsli);
 	   user.setActive(true);
 	   user.setUsername(user.getUserId());
 	   user.setPassword(new BCryptPasswordEncoder().encode("2016"));
