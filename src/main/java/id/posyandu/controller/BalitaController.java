@@ -27,8 +27,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import id.posyandu.domain.Balita;
+import id.posyandu.domain.Berat;
 import id.posyandu.domain.Beratantro;
 import id.posyandu.domain.ByPt;
+import id.posyandu.domain.Tinggi;
 import id.posyandu.domain.User;
 import id.posyandu.service.BalitaService;
 import id.posyandu.service.BeratService;
@@ -146,6 +148,28 @@ public class BalitaController {
 	    }
 	
 	@RequestMapping(value = "/balita/berat/{balitaId}", method = RequestMethod.GET)
+	public String BeratBalita(@PathVariable("balitaId") String balitaId, 
+			Model model){
+		
+		Balita balita = balitaService.findBalita(balitaId);
+		
+		model.addAttribute("balita", balita);
+		model.addAttribute("beratBalitas", (ArrayList<Berat>) beratService.findAllBeratByIdBalita(balitaId));
+		return "/balita/berat";
+	}
+	
+	@RequestMapping(value = "/balita/tinggi/{balitaId}", method = RequestMethod.GET)
+	public String TinggiBalita(@PathVariable("balitaId") String balitaId, 
+			Model model){
+		Balita balita = balitaService.findBalita(balitaId);
+		
+		model.addAttribute("balita", balita);
+		model.addAttribute("tinggiBalitas", (ArrayList<Tinggi>) tinggiService.findAllTinggiByIdBalita(balitaId));
+		return "/balita/tinggi";
+	}
+	
+	
+	@RequestMapping(value = "/balita/beratumur/{balitaId}", method = RequestMethod.GET)
     public String BeratByUmur(@PathVariable("balitaId") String balitaId, 
             Model model) throws SQLException {
 			
@@ -205,13 +229,13 @@ public class BalitaController {
 			model.addAttribute("balita", balita);
             model.addAttribute("beratBalitas", beratantros);
             
-            return "/balita/berat";
+            return "/balita/beratumur";
             
             
             
     }
 	
-	@RequestMapping(value = "/balita/tinggi/{balitaId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/balita/tinggiumur/{balitaId}", method = RequestMethod.GET)
     public String TinggiByUmur(@PathVariable("balitaId") String balitaId, 
             Model model) throws SQLException {
         
@@ -271,7 +295,7 @@ public class BalitaController {
 		model.addAttribute("balita", balita);
         model.addAttribute("beratBalitas", beratantros);
         
-        return "/balita/tinggi";
+        return "/balita/tinggiumur";
             
     }
 	
