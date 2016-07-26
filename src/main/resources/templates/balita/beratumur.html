@@ -13,7 +13,7 @@
 							class="icon-user"></i> Profile
 					</a></li>
 					<li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/balita/berat/') ? 'active':''}"><a th:href="@{/balita/berat/{id}(id=${balita.balitaId})}" > <i	class="icon-bar-chart"></i> Berat Badan Balita</a></li>
-					<li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/balita/berat/') ? 'active':''}"><a th:href="@{/balita/tinggi/{id}(id=${balita.balitaId})}" > <i	class="icon-bar-chart"></i> Tinggi Badan Balita</a></li>
+					<li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/balita/tinggi/') ? 'active':''}"><a th:href="@{/balita/tinggi/{id}(id=${balita.balitaId})}" > <i	class="icon-bar-chart"></i> Tinggi Badan Balita</a></li>
 					<li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/balita/beratumur/') ? 'active':''}"><a th:href="@{/balita/beratumur/{id}(id=${balita.balitaId})}" > <i	class="icon-bar-chart"></i> Berat Badan Menurut Umur</a></li>
 					<li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/balita/tinggiumur') ? 'active':''}"><a th:href="@{/balita/tinggiumur/{id}(id=${balita.balitaId})}" ><i	class="icon-bar-chart"></i> Tinggi Badan Menurut Umur</a></li>
 					<li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/balita/panjang') ? 'active':''}"><a th:href="@{/balita/panjang/{id}(id=${balita.balitaId})}" ><i	class="icon-bar-chart"></i> Panjang Badan Menurut Umur</a></li>

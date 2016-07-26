@@ -8,7 +8,7 @@ import id.posyandu.domain.Berat;
 
 public interface BeratRepository extends CrudRepository<Berat, String>{
 	
-	@Query(value = "SELECT * FROM berat where id_balita = :idBalita", nativeQuery=true)
+	@Query(value = "SELECT * FROM berat where id_balita = :idBalita order by umur", nativeQuery=true)
 	Iterable<Berat> findById(@Param("idBalita") String idBalita);
 	
 	@Query(value = "SELECT b.umur FROM berat b join beratbadanumur bbu on b.umur = bbu.umur where bbu.jenis_kelamin = 'Perempuan'", nativeQuery=true)
