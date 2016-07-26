@@ -376,7 +376,7 @@ public class BalitaController {
 		String query = "SELECT bt.panjang, bt.median, bt.minus1sd, bt.plus1sd, t.tinggi_balita, t.umur, b.berat_balita "
 				+ "FROM beratbadanpanjang bt JOIN tinggi t ON bt.panjang = ROUND(ROUND(t.tinggi_balita * 2) / 2, 1) "
 				+ "JOIN berat b ON b.umur = t.umur WHERE bt.jenis_kelamin = '" + jenisKelamin + "' "
-				+ "and b.id_balita = '" + balitaId + "' and b.umur < '25' ORDER By t.umur + 0";
+				+ "and b.id_balita = '" + balitaId + "' and b.umur < 25 ORDER By t.umur + 0";
 		
 		ResultSet rs = stmt.executeQuery(query);
 		
@@ -448,7 +448,7 @@ public class BalitaController {
 		String query = "SELECT bt.tinggi, bt.median, bt.minus1sd, bt.plus1sd, t.tinggi_balita, t.umur, b.berat_balita "
 				+ "FROM beratbadantinggi bt JOIN tinggi t ON bt.tinggi = ROUND(ROUND(t.tinggi_balita * 2) / 2, 1) "
 				+ "JOIN berat b ON b.umur = t.umur WHERE bt.jenis_kelamin = '" + jenisKelamin + "' "
-				+ "and b.id_balita = '" + balitaId + "' and b.umur > '24' ORDER By t.umur + 0";
+				+ "and b.id_balita = '" + balitaId + "' and b.umur > 24 ORDER By t.umur + 0";
 		
 		ResultSet rs = stmt.executeQuery(query);
 		
