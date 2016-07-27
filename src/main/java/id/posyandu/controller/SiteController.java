@@ -115,4 +115,9 @@ public class SiteController {
 		
 		return "user/account";
 	}
+	
+	@RequestMapping(value = {"/"}, method = RequestMethod.GET)
+	public String Index(){
+		return "index";
+	}
 }
