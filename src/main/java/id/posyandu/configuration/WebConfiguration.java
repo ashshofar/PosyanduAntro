@@ -17,19 +17,24 @@ public class WebConfiguration extends WebMvcConfigurerAdapter{
         //registry.addViewController("/403").setViewName("403");
     }
 	
-	@Override
-    public void addInterceptors(InterceptorRegistry registry) {
-         registry.addInterceptor(new ThymeleafLayoutInterceptor()); //To change body of generated methods, choose Tools | Templates.
-    }
-	
 	@Bean
     public JasperReportsViewResolver getJasperReportsViewResolver() {
         JasperReportsViewResolver resolver = new JasperReportsViewResolver();
-        resolver.setPrefix("resources/reports/");
+        resolver.setPrefix("classpath:/reports/");
         resolver.setSuffix(".jrxml");
-        resolver.setViewNames(new String[] {"report_*"});
+        resolver.setViewNames("report_*");
         resolver.setViewClass(JasperReportsMultiFormatView.class);
         resolver.setOrder(0);
         return resolver;
+        
+        
     }
+	
+	@Override
+    public void addInterceptors(InterceptorRegistry registry) {
+         registry.addInterceptor(new ThymeleafLayoutInterceptor());
+         
+    }
+	
+
 }

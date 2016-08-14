@@ -32,7 +32,7 @@ public class ThymeleafLayoutInterceptor extends HandlerInterceptorAdapter{
             return;
         }
         */
-        if (isRedirectOrForward(originalViewName)) {
+        if (isRedirectOrForward(originalViewName) || originalViewName.startsWith("report")) {
             return;
         }
         

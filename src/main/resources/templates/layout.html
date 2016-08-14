@@ -13,8 +13,11 @@
     <!--external css-->
     <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link rel="stylesheet" href="/css/owl.carousel.css" type="text/css"/>
+   
+    
     <link href="/assets/advanced-datatable/media/css/demo_page.css" rel="stylesheet" />
     <link href="/assets/advanced-datatable/media/css/demo_table.css" rel="stylesheet" />
+    
     
     <!-- Custom styles for this template -->
     <link href="/css/style.css" rel="stylesheet" />
@@ -26,6 +29,8 @@
 	<link href="/css/select2.min.css" rel="stylesheet"/>
 	
 	<link rel="stylesheet" type="text/css" href="/assets/bootstrap-datepicker/css/datepicker.css" />
+	
+	
 </head>
 <body>
 
@@ -147,7 +152,7 @@
 
     <!-- DataTables -->
     <script type="text/javascript" language="javascript" src="/assets/advanced-datatable/media/js/jquery.dataTables.js"></script>
-
+    
     <!--common script for all pages-->
     <script src="/js/common-scripts.js"></script>
 
@@ -158,6 +163,7 @@
     <script type="text/javascript" src="/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script src="/js/advanced-form-components.js"></script>
     
+    	
 
   <script>
 
@@ -186,10 +192,16 @@
   <script type="text/javascript" charset="utf-8">
           $(document).ready(function() {
               $('#example').dataTable( {
-                  "aaSorting": [[ 4, "desc" ]]
+                  "aaSorting": [[ 4, "desc" ]],
+                  dom : 'Bfrtip',
+                  buttons: ['copyHtml5',
+                            'excelHtml5',
+                            'pdfHtml5']
               } );
           } );
    </script>
+   
+   
    
    <script type="text/javascript" charset="utf-8">
           $(document).ready(function() {
