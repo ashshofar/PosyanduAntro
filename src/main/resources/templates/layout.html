@@ -106,16 +106,22 @@
                           <li><a th:href="@{/bbt/}">Berat / Tinggi </a></li>
                       </ul>
                   	</li>
+					<li th:if="*{infoUser.currentRole} == '[Bidan]' or *{infoUser.currentRole} == '[Admin]' or *{infoUser.currentRole} == '[Petugas]'">
+						<a th:href="@{/report/}" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/report') ? 'active':''}"> <i class="icon-book"></i> <span>Laporan</span></a>
+					</li>
+					<li th:if="*{infoUser.currentRole} == '[Admin]' or *{infoUser.currentRole} == '[Petugas]'">
+						<a th:href="@{/posbulanan/}" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/posbulanan') ? 'active':''}"> <i class="icon-calendar"></i> <span>Data Bulanan</span></a>
+					</li>
 					<li th:if="*{infoUser.currentRole} == '[Admin]'">
 						<a th:href="@{/assigment/}" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/assigment') ? 'active':''}"> <i class="icon-dashboard"></i> <span>Assigment</span></a>
 					</li>
-					<li>
+					<li th:if="*{infoUser.currentRole} == '[Admin]' or *{infoUser.currentRole} == '[Petugas]'">
 						<a th:href="@{/balita/}" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/balita') ? 'active':''}"> <i class="icon-github-alt"></i> <span>Balita</span></a>
 					</li>
-					<li>
+					<li th:if="*{infoUser.currentRole} == '[Admin]' or *{infoUser.currentRole} == '[Petugas]'">
 						<a th:href="@{/berat/}" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/berat') ? 'active':''}"> <i class="icon-file"></i> <span>Berat Badan</span></a>
 					</li>
-					<li>
+					<li th:if="*{infoUser.currentRole} == '[Admin]' or *{infoUser.currentRole} == '[Petugas]'">
 						<a th:href="@{/tinggi/}" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/tinggi') ? 'active':''}"> <i class="icon-file"></i> <span>Tinggi Badan</span></a>
 					</li>
 					

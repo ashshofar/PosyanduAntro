@@ -1,0 +1,26 @@
+    <div th:fragment="content">
+	<div class="row">
+		<div class="col-lg-12">
+			<section class="panel">
+				<header class="panel-heading">
+					<h2>Laporan Balita</h2>
+				</header>
+				<div class="panel-body">
+					<div th:replace="/fragments/alert"></div>
+					<a th:href="@{/report/balita}" target="_blank">
+					<button type="button" class="btn btn-primary">
+							<i class="icon-book"></i> &nbsp; Format Pdf
+					</button>
+					</a>
+					<a th:href="@{/report/balita?format=xls}" target="_blank">
+					<button type="button" class="btn btn-primary">
+							<i class="icon-book"></i> &nbsp; Format Excel
+					</button>
+					</a>
+				</div>
+			</section>
+		</div>
+	</div>
+	
+	
+	</div>
