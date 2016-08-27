@@ -246,7 +246,7 @@ public class UserController {
 		   Jabatan jabatan,
 		   final RedirectAttributes redirectAttributes) throws IllegalStateException, IOException{
 	  
-	  
+	  /*
 	  String namaFile = foto.getName();
       String jenisFile = foto.getContentType();
       String namaAsli = foto.getOriginalFilename();
@@ -264,7 +264,7 @@ public class UserController {
       File tujuan = new File(lokasiTujuan + File.separator + namaAsli);
       
       foto.transferTo(tujuan);
-      
+      */
       
 	   
 	   if (userService.saveUser(user) != null) {
@@ -274,7 +274,8 @@ public class UserController {
       }
 	   
 	   
-	   user.setFoto(lokasiTujuan + File.separator + namaAsli);
+	   //user.setFoto(lokasiTujuan + File.separator + namaAsli);
+	   user.setFoto("foto");
 	   user.setActive(true);
 	   user.setUsername(user.getUserId());
 	   user.setPassword(new BCryptPasswordEncoder().encode("2016"));
