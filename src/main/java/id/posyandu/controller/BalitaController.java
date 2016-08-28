@@ -373,10 +373,18 @@ public class BalitaController {
 	
 		Connection c = ds.getConnection();
 		Statement stmt =c.createStatement();
+		/*
 		String query = "SELECT bt.panjang, bt.median, bt.minus1sd, bt.plus1sd, t.tinggi_balita, t.umur, b.berat_balita "
 				+ "FROM beratbadanpanjang bt JOIN tinggi t ON bt.panjang = ROUND(ROUND(t.tinggi_balita * 2) / 2, 1) "
 				+ "JOIN berat b ON b.umur = t.umur WHERE bt.jenis_kelamin = '" + jenisKelamin + "' "
 				+ "and b.id_balita = '" + balitaId + "' and b.umur < 25 ORDER By t.umur + 0";
+		*/
+		
+		String query = "SELECT bt.panjang, bt.median, bt.minus1sd, bt.plus1sd, t.tinggi_balita, t.umur, b.berat_balita "
+				+ "FROM tinggi t JOIN beratbadanpanjang bt ON bt.panjang =  ROUND(ROUND(t.tinggi_balita * 2) / 2, 1) "
+				+ "JOIN berat b ON b.umur = t.umur where t.id_balita = '" + balitaId + "' "
+				+ "AND b.id_balita = '" + balitaId + "' AND bt.jenis_kelamin = '" + jenisKelamin + "' "
+				+ "AND b.umur < 25 AND t.umur < 25 ORDER BY t.umur + 0";
 		
 		ResultSet rs = stmt.executeQuery(query);
 		
@@ -445,10 +453,19 @@ public class BalitaController {
 	
 		Connection c = ds.getConnection();
 		Statement stmt =c.createStatement();
+		
+		/*
 		String query = "SELECT bt.tinggi, bt.median, bt.minus1sd, bt.plus1sd, t.tinggi_balita, t.umur, b.berat_balita "
 				+ "FROM beratbadantinggi bt JOIN tinggi t ON bt.tinggi = ROUND(ROUND(t.tinggi_balita * 2) / 2, 1) "
 				+ "JOIN berat b ON b.umur = t.umur WHERE bt.jenis_kelamin = '" + jenisKelamin + "' "
 				+ "and b.id_balita = '" + balitaId + "' and b.umur > 24 ORDER By t.umur + 0";
+		*/
+		
+		String query = "SELECT bt.tinggi, bt.median, bt.minus1sd, bt.plus1sd, t.tinggi_balita, t.umur, b.berat_balita "
+				+ "FROM tinggi t JOIN beratbadantinggi bt ON bt.tinggi =  ROUND(ROUND(t.tinggi_balita * 2) / 2, 1) "
+				+ "JOIN berat b ON b.umur = t.umur where t.id_balita = '" + balitaId + "' "
+				+ "AND b.id_balita = '" + balitaId + "' AND bt.jenis_kelamin = '" + jenisKelamin + "' "
+				+ "AND b.umur > 24 AND t.umur > 24 ORDER BY t.umur + 0";
 		
 		ResultSet rs = stmt.executeQuery(query);
 		
