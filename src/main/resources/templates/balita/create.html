@@ -10,7 +10,7 @@
 				<div class="panel-body">
 					<div class="form">
 						<form th:action="@{/balita/save}" th:object="${balita}" method="post" id="form1"
-							class="cmxform form-horizontal tasi-form">
+							class="cmxform form-horizontal tasi-form" enctype="multipart/form-data">
 							<div class="form-group ">
 								<label for="panjang" class="control-label col-lg-2">Nama</label>
 								<div class="col-lg-10">
@@ -43,6 +43,7 @@
                                         </select>
 								</div>
 							</div>
+							<!-- 
 							<div class="form-group ">
 								<label for="minus3sd" class="control-label col-lg-2">Foto</label>
 								<div class="col-lg-10">
@@ -50,6 +51,15 @@
 										class="form-control" />
 								</div>
 							</div>
+							 -->
+							 
+							 <div class="form-group ">
+								<label for="minus2sd" class="control-label col-lg-2">Foto</label>
+								<div class="col-lg-10">
+									<input id="upload-file-input" type="file" name="foto" accept="*" class="form-control"/>
+								</div>
+							</div>
+							 
 							<div class="form-group ">
 								<label for="minus2sd" class="control-label col-lg-2">Nama Ayah</label>
 								<div class="col-lg-10">

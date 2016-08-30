@@ -1,5 +1,7 @@
 package id.posyandu.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,6 +12,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +20,15 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -85,14 +91,39 @@ public class BalitaController {
 	
 	@RequestMapping(value = {"/balita/save"}, method = RequestMethod.POST)
     public String saveBalita(@ModelAttribute("balita") Balita balita,
-    		
-            final RedirectAttributes redirectAttributes) {
-
+    		 BindingResult errors,
+    		@RequestParam("foto") MultipartFile foto, 
+ 		    final RedirectAttributes redirectAttributes) throws IllegalStateException, IOException {
+		
+		  
+		  String namaFoto = balita.getNama();
+		  String namaFile = foto.getName();
+	      String jenisFile = foto.getContentType();
+	      String namaAsli = foto.getOriginalFilename();
+	      Long ukuran = foto.getSize();
+	      
+	      String lokasiPath = "C:" + File.separator + "xampp" + File.separator + "htdocs" + File.separator + "images";
+	      //System.out.println("Lokasi Tomcat dijalankan : "+lokasiTomcat);
+	      //String lokasiTujuan = lokasiPath;
+	      
+	      File folderTujuan = new File(lokasiPath);
+	      if(!folderTujuan.exists()){
+	          folderTujuan.mkdirs();
+	      }
+	      
+	      balita.setFoto("http://localhost:8888/images/" + namaFoto + ".jpg");
+          File tujuan = new File(lokasiPath + File.separator + namaFoto + ".jpg");
+	      foto.transferTo(tujuan);
+	      
         if (balitaService.saveBalita(balita) != null) {
             redirectAttributes.addFlashAttribute("save", "success");
         } else {
             redirectAttributes.addFlashAttribute("save", "unsuccess");
         }
+        
+          
+	         
+          
         
         return "redirect:/balita";
     }

@@ -2,12 +2,18 @@ package id.posyandu.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -18,6 +24,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -36,6 +43,9 @@ public class UserController {
     
     @Autowired
     AssigmentService assigmentService;
+    
+    @Autowired
+	DataSource ds;
     
    @PreAuthorize("hasAnyAuthority('Admin')") 
    @RequestMapping(value = {"/user"}, method = RequestMethod.GET)
@@ -336,6 +346,26 @@ public class UserController {
   	
   	return "redirect:/user/orangtua";
   }
+ 
+ @RequestMapping(value="/user/cek", method = RequestMethod.POST)
+ public String cek(@RequestParam("username") String username) throws SQLException{
+	 
+	 Connection c = ds.getConnection();
+	 Statement stmt =c.createStatement();
+	 String query = "SELECT username from user where username = '" + username + "' ";
+	 ResultSet rs = stmt.executeQuery(query);
+	 
+	 //String result;
+	 
+	 if(!rs.next()){
+		 return  "0";
+	 }else{
+		 return  "1";
+	 }
+	 
+	 //return result;
+	
+ }
  
  
  /*  
