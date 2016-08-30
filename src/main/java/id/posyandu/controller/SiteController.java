@@ -43,9 +43,8 @@ public class SiteController {
 	public String dashboard(Model model) throws SQLException {
 		
 		//Authentication authentication  = SecurityContextHolder.getContext().getAuthentication();
-		//User user = (User)authentication.getPrincipal();
+		//String user = (String)authentication.getPrincipal();
 		//String userId = user.getUserId();
-		
 		
 		Connection c = ds.getConnection();
 		Statement stmt = c.createStatement();
@@ -101,6 +100,7 @@ public class SiteController {
 		model.addAttribute("allBalitas", (ArrayList<Balita>) balitaService.getAllBalitas());
 		
 		return "site/dashboard";
+		
 	}
 	
 	

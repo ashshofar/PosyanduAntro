@@ -52,8 +52,9 @@
 					<!--user info table start-->
 							<section class="panel">
 								<div class="panel-body">
-									<a th:href="@{/balita/view/{id}(id=${data.balitaId})}" class="task-thumb"> <img src="/img/avatar1.jpg"
-										alt="" />
+									<a th:href="@{/balita/view/{id}(id=${data.balitaId})}" class="task-thumb">
+										<div th:if="${data.foto == 'foto'}"><img th:src="@{~/img/ayana3.jpg}" height="90" width="83"/></div>
+										<div th:if="${data.foto != 'foto'} "><img th:src="${balita.foto}" height="90" width="83"/></div>
 									</a>
 									<div class="task-thumb-details">
 										<h1>

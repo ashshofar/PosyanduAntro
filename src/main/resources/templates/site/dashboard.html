@@ -1,4 +1,4 @@
-<div th:fragment="content">
+<div th:fragment="content" th:if="*{infoUser.currentRole} != '[Orangtua]'">
 	<!--state overview start-->
 	<div class="row state-overview">
 		<div class="col-lg-3 col-sm-6">
@@ -46,9 +46,10 @@
 			</section>
 		</div>
 	</div>
+
+	<!--   
 	<div class="row">
 		<div class="col-lg-6" th:each="data : ${allBalitas}">
-			<!--user info table start-->
 			<section class="panel">
 				<div class="panel-body">
 					<a th:href="@{/balita/view/{id}(id=${data.balitaId})}" class="task-thumb"> <img src="img/avatar1.jpg"
@@ -62,8 +63,30 @@
 					</div>
 				</div>
 			</section>
-			<!--user info table end-->
+			
 		</div>
 	</div>
-	<!--state overview end-->
+	 -->
+
+	
+
+</div>
+
+<div th:fragment="content" th:if="*{infoUser.currentRole} == '[Orangtua]'">
+	<div class="row">
+		<div class="col-lg-12">
+			<section class="panel">
+				<header class="panel-heading">
+					Dashboard Orangtua
+				</header>
+				<div class="panel-body">
+					<a th:href="@{/account}">
+					<button type="button" class="btn btn-primary">
+							Pindah Ke Profile
+					</button>
+					</a>
+				</div>
+			</section>
+		</div>
+	</div>
 </div>
