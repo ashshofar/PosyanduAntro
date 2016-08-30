@@ -3,7 +3,9 @@
 		<aside class="profile-nav col-lg-3">
 			<section class="panel">
 				<div class="user-heading round">
-					<a href="#"> <img src="/img/ayana3.jpg" alt=""/>
+					<a href="#"> 
+					<div th:if="${balita.foto == 'foto'}"><img th:src="@{~/img/ayana3.jpg}"/></div>
+					<div th:if="${balita.foto != 'foto'} "><img th:src="${balita.foto}"/></div>
 					</a>
 					<h1><label th:text="${balita.nama}"></label></h1>
 				</div>

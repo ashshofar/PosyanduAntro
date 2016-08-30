@@ -91,21 +91,15 @@ public class BalitaController {
 	
 	@RequestMapping(value = {"/balita/save"}, method = RequestMethod.POST)
     public String saveBalita(@ModelAttribute("balita") Balita balita,
-    		 BindingResult errors,
+    		BindingResult errors,
     		@RequestParam("foto") MultipartFile foto, 
  		    final RedirectAttributes redirectAttributes) throws IllegalStateException, IOException {
 		
 		  
 		  String namaFoto = balita.getNama();
-		  String namaFile = foto.getName();
-	      String jenisFile = foto.getContentType();
-	      String namaAsli = foto.getOriginalFilename();
-	      Long ukuran = foto.getSize();
-	      
+		 	      
 	      String lokasiPath = "C:" + File.separator + "xampp" + File.separator + "htdocs" + File.separator + "images";
-	      //System.out.println("Lokasi Tomcat dijalankan : "+lokasiTomcat);
-	      //String lokasiTujuan = lokasiPath;
-	      
+	      	      
 	      File folderTujuan = new File(lokasiPath);
 	      if(!folderTujuan.exists()){
 	          folderTujuan.mkdirs();
@@ -164,10 +158,24 @@ public class BalitaController {
 	@RequestMapping(value = "/balita/update/{balitaId}", method = RequestMethod.POST)
 	public String updateBalita(@PathVariable("balitaId") String balitaId, 
 	    		Balita balita, 
-	    		final RedirectAttributes redirectAttributes){
+	    		BindingResult errors,
+	    		@RequestParam("foto") MultipartFile foto,
+	    		final RedirectAttributes redirectAttributes) throws IllegalStateException, IOException{
 	    	
 	    	balita.setBalitaId(balitaId);
-	    		    	
+	    	
+	    	String namaFoto = balita.getNama();
+	 	      
+		    String lokasiPath = "C:" + File.separator + "xampp" + File.separator + "htdocs" + File.separator + "images";
+		      	      
+		    File folderTujuan = new File(lokasiPath);
+		    if(!folderTujuan.exists()){
+		        folderTujuan.mkdirs();
+		    }
+		      
+		    balita.setFoto("http://localhost:8888/images/" + namaFoto + ".jpg");
+	        File tujuan = new File(lokasiPath + File.separator + namaFoto + ".jpg");
+		    foto.transferTo(tujuan);
 	    	
 	    	if (balitaService.saveBalita(balita) != null) {
 	            redirectAttributes.addFlashAttribute("edit", "success");
